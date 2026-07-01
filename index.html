@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- ============================================
+     НАСТРОЙКИ МОБИЛЬНОГО ПРИЛОЖЕНИЯ (WEB APP)
+     ============================================ -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f172a">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230891b2'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'>🏥</text></svg>">
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230891b2'/><text x='50' y='68' font-size='55' text-anchor='middle' fill='white'></text></svg>">
+<!-- Встроенный манифест для скрытия интерфейса браузера на Android -->
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoi0JfQtdC60YHRgtGA0LDQvdCwIiwic2hvcnRfbmFtZSI6ItCX0LXQutGB0YLRgNCw0L3QsCIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjMGYxNzJhIiwidGhlbWVfY29sb3IiOiIjMDg5MWIyIiwib3JpZW50YXRpb24iOiJwb3J0cmFpdCJ9">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Приёмный Покой v17.1 - AI Dialogues & Campus</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--pri:#0891b2;--pri-dk:#0e7490;--pri-lt:#cffafe;--acc:#dc2626;--suc:#059669;--wrn:#d97706;--bg:#f1f5f9;--card:#fff;--txt:#0f172a;--sec:#64748b;--brd:#e2e8f0;--r:12px;--sh:0 4px 20px rgba(0,0,0,.08)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;line-height:1.4}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(var(--bg) 1px,transparent 1px),linear-gradient(90deg,var(--bg) 1px,transparent 1px);background-size:40px 40px;opacity:.3;z-index:0;pointer-events:none}
+@keyframes ap{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes as{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes af{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes ag{0%,100%{filter:brightness(1)}50%{filter:brightness(1.4)}}
+.a-pulse{animation:ap 1.2s infinite}.a-shake{animation:as .4s infinite}.a-float{animation:af 2s infinite}.a-glow{animation:ag 1.5s infinite}
+#loader{position:fixed;inset:0;background:linear-gradient(135deg,#0e7490,#0891b2);z-index:10000;display:flex;flex-direction:column;justify-content:center;align-items:center;color:white;padding:20px;text-align:center}
+.l-logo{font-size:5rem;margin-bottom:20px;animation:ap 1.5s ease infinite}
+.l-title{font-size:2.5rem;font-weight:800;letter-spacing:2px;margin-bottom:8px}
+.l-sub{opacity:.8;margin-bottom:30px;font-size:.95rem}
+.l-bar{width:300px;max-width:90%;height:8px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+.l-fill{height:100%;background:linear-gradient(90deg,#fff,#cffafe);width:0%;transition:.3s}
+.l-fact{margin:25px 0;max-width:500px;font-style:italic;opacity:.85;min-height:50px}
+.l-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.l-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;padding:12px 24px;border-radius:10px;cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+.l-btn:hover:not(:disabled){background:rgba(255,255,255,.3);transform:translateY(-2px)}
+.l-btn:disabled{opacity:.4;cursor:not-allowed}
+.l-btn.dng{background:rgba(220,38,38,.3);border-color:rgba(220,38,38,.6)}
+.l-select{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.4);color:white;padding:10px 14px;border-radius:8px;font-size:.9rem;margin:10px 0}
+.l-select option{color:#000}
+.l-stat{margin-top:15px;font-size:.8rem;opacity:.7}
+#stress{position:fixed;inset:0;pointer-events:none;z-index:999;transition:.5s}
+#stress.on{animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{background:radial-gradient(ellipse at center,transparent 40%,rgba(220,38,38,.15) 100%)}50%{background:radial-gradient(ellipse at center,transparent 30%,rgba(220,38,38,.35) 100%)}}
+#game{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:15px;opacity:0;transition:.5s}
+#game.vis{opacity:1}
+.tbar{background:var(--card);border-radius:var(--r);padding:12px 16px;box-shadow:var(--sh);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:15px}
+.st{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.88rem}
+.st-ic{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--pri-lt);color:var(--pri-dk);font-size:1rem}
+.st-ic.red{background:#fee2e2;color:var(--acc)}.st-ic.grn{background:#d1fae5;color:var(--suc)}.st-ic.amb{background:#fef3c7;color:var(--wrn)}
+.st-l{font-size:.65rem;color:var(--sec);text-transform:uppercase;letter-spacing:.5px}
+.st-v{font-size:.95rem;font-weight:700}
+.xpb{width:90px;height:5px;background:var(--brd);border-radius:3px;overflow:hidden;margin-top:2px}
+.xpf{height:100%;background:linear-gradient(90deg,var(--pri),var(--pri-dk));transition:.4s}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+@media(max-width:900px){.mgrid{grid-template-columns:1fr}}
+.pcard{background:var(--card);border-radius:var(--r);padding:20px;box-shadow:var(--sh);position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--pri)}.pcard.crit::before{background:var(--acc);animation:pbr 1s infinite}
+@keyframes pbr{50%{opacity:.5}}
+.phdr{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.av{width:65px;height:65px;border-radius:50%;background:var(--pri-lt);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--pri-dk);position:relative;flex-shrink:0}
+.av.crit{background:#fee2e2;color:var(--acc)}
+.av .dot{position:absolute;bottom:2px;right:2px;width:14px;height:14px;border-radius:50%;background:var(--suc);border:3px solid white}
+.av.crit .dot{background:var(--acc);animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.3}}
+.pinfo h2{font-size:1.15rem;margin-bottom:3px}
+.pinfo .meta{color:var(--sec);font-size:.82rem;margin-bottom:4px}
+.tbadge{display:inline-block;padding:3px 9px;border-radius:10px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.t-red{background:#fee2e2;color:var(--acc)}.t-yel{background:#fef3c7;color:var(--wrn)}.t-grn{background:#d1fae5;color:var(--suc)}
+.trust{margin:10px 0}
+.trust-l{font-size:.7rem;color:var(--sec);font-weight:600;margin-bottom:3px;display:flex;justify-content:space-between}
+.trust-b{height:6px;background:var(--brd);border-radius:3px;overflow:hidden}
+.trust-f{height:100%;background:var(--suc);transition:.3s}
+.cmp{background:#f8fafc;border-left:3px solid var(--pri);padding:10px 13px;border-radius:6px;font-style:italic;font-size:.88rem;color:var(--sec);margin:12px 0}
+.cmp i{color:var(--pri);margin-right:6px}
+.o3d-scene{width:100%;height:140px;perspective:800px;margin:10px 0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-radius:10px;position:relative;overflow:hidden}
+.o3d-organ{position:relative;width:100px;height:100px;transform-style:preserve-3d;animation:rot3d 8s infinite linear;transform-origin:50px 50px 50px}
+@keyframes rot3d{0%{transform:rotateY(0) rotateX(10deg)}100%{transform:rotateY(360deg) rotateX(10deg)}}
+/* Ускоренное вращение при критическом состоянии */
+@keyframes rot3d_fast{
+    0%{transform:rotateY(0) rotateX(15deg) scale(1.1)}
+    50%{transform:rotateY(180deg) rotateX(-5deg) scale(1.2)}
+    100%{transform:rotateY(360deg) rotateX(15deg) scale(1.1)}
+}
+.o3d-organ.critical {
+    animation: rot3d_fast 2s infinite linear !important;
+}
+.o3d-organ.critical .o3d-face {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+}
+.o3d-face{position:absolute;width:100px;height:100px;display:flex;align-items:center;justify-content:center;font-size:3rem;border:2px solid var(--pri);border-radius:10px;background:linear-gradient(135deg,#fff,#e0f2fe);backface-visibility:hidden}
+.o3d-front{transform:translateZ(50px)}
+.o3d-back{transform:rotateY(180deg) translateZ(50px);background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-color:#db2777}
+.o3d-left{transform:rotateY(-90deg) translateZ(50px);background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:#f59e0b}
+.o3d-right{transform:rotateY(90deg) translateZ(50px);background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-color:#059669}
+.o3d-top{transform:rotateX(90deg) translateZ(50px);background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-color:#8b5cf6}
+.o3d-bottom{transform:rotateX(-90deg) translateZ(50px);background:linear-gradient(135deg,#fee2e2,#fecaca);border-color:#dc2626}
+.ecg-c{background:#0f172a;border-radius:8px;padding:4px;margin-bottom:10px;height:75px;position:relative;overflow:hidden;border:1px solid #1e293b}
+#ecg{width:100%;height:100%;display:block}
+.ecg-lb{position:absolute;top:3px;left:8px;font-size:.68rem;font-weight:700;color:#10b981;font-family:monospace;letter-spacing:1px;z-index:2}
+.ecg-lb.dng{color:#dc2626}.ecg-lb.wrn{color:#f59e0b}
+.ecg-hr{position:absolute;top:3px;right:8px;font-size:.72rem;font-weight:700;color:#10b981;font-family:monospace;z-index:2}
+.vits{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.vit{background:#f8fafc;padding:10px;border-radius:8px;border:1px solid var(--brd);transition:.3s}
+.vit.wrn{background:#fef3c7;border-color:#fcd34d}
+.vit.dng{background:#fee2e2;border-color:#fca5a5;animation:shk .5s}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+.vit-lb{font-size:.68rem;color:var(--sec);text-transform:uppercase;display:flex;align-items:center;gap:4px}
+.vit-lb i{font-size:.8rem}
+.vit-v{font-size:1.15rem;font-weight:700;margin-top:2px;font-variant-numeric:tabular-nums}
+.vit-u{font-size:.7rem;color:var(--sec);margin-left:2px}
+.inf{font-size:.72rem;color:var(--sec);margin-bottom:4px}
+.inf b{color:var(--txt);font-weight:600}
+.log{max-height:100px;overflow-y:auto;font-size:.7rem;color:var(--sec);background:#f8fafc;padding:8px;border-radius:6px;margin-top:8px}
+.log div{padding:2px 0;border-bottom:1px solid var(--brd)}
+.log div:last-child{border-bottom:none}
+.apan{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:var(--sh)}
+.pt{font-size:.75rem;color:var(--sec);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-weight:700}
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}@media(max-width:600px){.ag{grid-template-columns:1fr 1fr}}
+.btn{border:none;background:#f8fafc;color:var(--txt);padding:12px 6px;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;font-size:.72rem;display:flex;flex-direction:column;align-items:center;gap:5px;transition:.2s;border:1px solid var(--brd)}
+.btn i{font-size:1.2rem;color:var(--pri)}
+.btn:hover{background:var(--pri);color:white;transform:translateY(-2px);box-shadow:0 5px 12px rgba(8,145,178,.3);border-color:var(--pri)}
+.btn:hover i{color:white}
+.btn:active{transform:translateY(0)}
+.btn.em{background:var(--acc);color:white;border-color:var(--acc)}.btn.em i{color:white}
+.btn.em:hover{background:#991b1b}
+.btn.sc{background:var(--suc);color:white;border-color:var(--suc)}.btn.sc i{color:white}
+.btn.vio{background:#8b5cf6;color:white;border-color:#8b5cf6}.btn.vio i{color:white}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.tbar2{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+@media(max-width:600px){.tbar2{grid-template-columns:1fr 1fr}}
+.tbtn{border:1px solid var(--brd);background:white;padding:8px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:.72rem;font-weight:600;display:flex;align-items:center;gap:5px;justify-content:center;transition:.2s;color:var(--txt)}
+.tbtn:hover{background:var(--pri-lt);border-color:var(--pri);color:var(--pri-dk)}
+.tbtn i{color:var(--pri)}
+.evb{background:linear-gradient(90deg,#fef3c7,#fde68a);border:1px solid #fcd34d;padding:10px 14px;border-radius:10px;margin-bottom:12px;display:none;animation:sd .4s}
+.evb.on{display:block}.evb.crt{background:linear-gradient(90deg,#fee2e2,#fecaca);border-color:#fca5a5}
+@keyframes sd{from{transform:translateY(-20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.epb{position:fixed;top:0;left:0;width:100%;padding:8px;background:#dc2626;color:white;text-align:center;font-weight:700;font-size:.85rem;z-index:500;display:none;animation:pb 1s infinite}
+.epb.on{display:block}
+@keyframes pb{50%{background:#991b1b}}
+.mbg{display:none;position:fixed;inset:0;background:rgba(15,23,42,.7);z-index:1000;justify-content:center;align-items:center;padding:15px;backdrop-filter:blur(4px)}
+.mbg.on{display:flex;animation:fi .2s}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.mod{background:white;border-radius:var(--r);width:100%;max-width:700px;max-height:90vh;overflow-y:auto;padding:20px;animation:su .3s}
+@keyframes su{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.mhdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--brd)}
+.mhdr h3{font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.mhdr h3 i{color:var(--pri)}
+.mcls{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--sec);padding:4px 8px}
+.mcls:hover{color:var(--acc)}
+.chat-box{background:#f8fafc;border-radius:10px;padding:15px;max-height:400px;overflow-y:auto;margin-bottom:10px}
+.chat-msg{margin-bottom:10px;padding:10px;border-radius:8px;font-size:.88rem;line-height:1.4}
+.chat-msg.patient{background:#e0f2fe;border-left:3px solid var(--pri);margin-right:20px}
+.chat-msg.doctor{background:#d1fae5;border-right:3px solid var(--suc);margin-left:20px;text-align:right}
+.chat-questions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chat-q{padding:8px;background:white;border:1px solid var(--brd);border-radius:6px;cursor:pointer;font-size:.78rem;transition:.2s}
+.chat-q:hover{background:var(--pri-lt);border-color:var(--pri)}
+.campus{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.campus-building{padding:15px;border:2px dashed var(--brd);border-radius:10px;text-align:center;min-height:120px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;transition:.2s}
+.campus-building:hover{border-color:var(--pri);background:var(--pri-lt)}
+.campus-building.built{border-style:solid;border-color:var(--suc);background:#d1fae5}
+.campus-building i{font-size:2.5rem;color:var(--pri);margin-bottom:8px}
+.campus-building .n{font-weight:700;font-size:.9rem}
+.campus-building .c{font-size:.75rem;color:var(--sec);margin-top:5px}
+.campus-building.built i{color:var(--suc)}
+.theory-card{background:#f8fafc;border-radius:10px;padding:15px;margin-bottom:15px;border-left:4px solid var(--pri)}
+.theory-card h4{margin-bottom:8px;color:var(--pri-dk)}
+.theory-card p{font-size:.88rem;line-height:1.5;margin-bottom:8px}.dlist,.drl{display:grid;gap:7px;max-height:400px;overflow-y:auto}
+.drl{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.dopt,.dr{padding:10px;border:2px solid var(--brd);border-radius:7px;cursor:pointer;transition:.2s}
+.dopt{display:flex;justify-content:space-between;align-items:center}
+.dopt:hover,.dr:hover{border-color:var(--pri);background:var(--pri-lt)}
+.dopt.ok{border-color:var(--suc);background:#d1fae5}.dopt.no{border-color:var(--acc);background:#fee2e2}
+.dn,.drn{font-weight:600;font-size:.85rem}
+.dd,.drd{font-size:.75rem;color:var(--sec);margin-top:2px}
+.dr.sel{border-color:var(--pri);background:var(--pri-lt);font-weight:700}
+.dr.inc{border-color:var(--acc);background:#fee2e2}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:600px){.sg{grid-template-columns:1fr}}
+.sk{padding:12px;border:2px solid var(--brd);border-radius:9px;text-align:center;transition:.2s}
+.sk:hover{border-color:var(--pri);transform:translateY(-2px)}
+.sk-i{font-size:1.8rem;color:var(--pri);margin-bottom:6px}
+.sk-n{font-weight:700;margin-bottom:3px;font-size:.9rem}
+.sk-l{font-size:.75rem;color:var(--sec);margin-bottom:6px}
+.sk-d{font-size:.7rem;color:var(--sec);margin-bottom:8px;min-height:30px}
+.skb{background:var(--pri);color:white;border:none;padding:5px 11px;border-radius:5px;font-size:.72rem;cursor:pointer;font-weight:700}
+.skb:disabled{background:var(--brd);color:var(--sec);cursor:not-allowed}
+.mga{background:#0f172a;border-radius:9px;padding:15px;min-height:260px;position:relative;color:white;overflow:hidden}
+#cutL,#sutL{width:100%;height:180px;position:relative;background:#1e293b;border-radius:7px;cursor:crosshair}
+.cpath{position:absolute;top:50%;left:0;right:0;height:4px;background:#dc2626;transform:translateY(-50%);border-radius:2px;box-shadow:0 0 10px rgba(220,38,38,.8)}
+.cpt,.spt{position:absolute;width:16px;height:16px;border-radius:50%;background:#fbbf24;transform:translate(-50%,-50%);cursor:pointer;transition:.15s;box-shadow:0 0 12px rgba(251,191,36,.8);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#0f172a}
+.cpt.ok,.spt.ok{background:#10b981;box-shadow:0 0 12px rgba(16,185,129,.8)}
+.cpt.ms,.spt.ms{background:#dc2626}
+.def-c,.cpr-c{text-align:center;padding:15px}
+.hrt-b{font-size:4.5rem;color:#dc2626;animation:hb 1s infinite}
+@keyframes hb{0%,100%{transform:scale(1)}30%{transform:scale(1.2)}}
+.b-ind{width:100%;height:70px;background:#1e293b;border-radius:7px;margin:15px 0;position:relative;overflow:hidden}
+.b-ln{position:absolute;top:0;bottom:0;width:4px;background:#10b981;box-shadow:0 0 12px #10b981;left:0;animation:bm 1s linear infinite}
+.b-tg{position:absolute;top:0;bottom:0;left:50%;width:40px;transform:translateX(-50%);background:rgba(16,185,129,.2);border:2px solid #10b981;border-radius:4px}
+@keyframes bm{0%{left:0}100%{left:100%}}
+#intC{width:100%;height:220px;background:#1e293b;border-radius:7px;cursor:crosshair;touch-action:none}
+.cpr-m{width:100%;height:50px;background:#1e293b;border-radius:7px;margin:15px 0;position:relative;overflow:hidden}
+.cpr-ind{position:absolute;top:0;bottom:0;width:4px;background:#fbbf24;box-shadow:0 0 12px #fbbf24;left:0;transition:.05s linear}
+.cpr-tg{position:absolute;top:0;bottom:0;left:50%;width:60px;transform:translateX(-50%);background:rgba(16,185,129,.2);border:2px solid #10b981;border-radius:4px}
+.cpr-st{display:flex;justify-content:space-around;margin-top:10px;font-size:.85rem}
+.cpr-st-v{font-size:1.3rem;font-weight:700;color:#10b981}
+.bp{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}
+@media(max-width:500px){.bp{grid-template-columns:1fr}}
+.bi{padding:8px;background:#f8fafc;border-radius:6px;font-size:.78rem;border-left:3px solid var(--brd)}
+.bi.hi{border-color:var(--acc);background:#fef2f2}.bi.lo{border-color:var(--pri);background:#f0f9ff}
+.bi-n{font-weight:600;color:var(--sec);font-size:.65rem;text-transform:uppercase}
+.bi-v{font-size:.95rem;font-weight:700;margin-top:1px}
+.wg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.bed{padding:10px;border:2px dashed var(--brd);border-radius:7px;text-align:center;min-height:80px;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:.75rem;color:var(--sec)}
+.bed.oc{border-style:solid;border-color:var(--pri);background:var(--pri-lt)}.bed.crt{border-color:var(--acc);background:#fee2e2}
+.bed i{font-size:1.4rem;margin-bottom:3px}
+.al{display:grid;gap:8px;max-height:400px;overflow-y:auto}.ach{padding:10px;border:1px solid var(--brd);border-radius:7px;display:flex;gap:10px;align-items:center;transition:.2s}
+.ach.un{background:var(--pri-lt);border-color:var(--pri)}.ach.lk{opacity:.5}
+.ai{width:38px;height:38px;border-radius:9px;background:var(--brd);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--sec)}
+.ach.un .ai{background:var(--pri);color:white}
+.inv-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;max-height:400px;overflow-y:auto}
+.inv-i{padding:10px;border:1px solid var(--brd);border-radius:7px;background:#f8fafc}
+.inv-i .n{font-weight:700;font-size:.85rem;margin-bottom:3px}
+.inv-i .s{font-size:.7rem;color:var(--sec);margin-bottom:5px}
+.inv-i .c{display:flex;justify-content:space-between;align-items:center;font-size:.78rem}
+.inv-i .q{font-weight:700;color:var(--pri)}.inv-i .q.low{color:var(--acc)}
+.stf-g{display:grid;gap:8px;max-height:400px;overflow-y:auto}
+.stf-i{padding:12px;border:1px solid var(--brd);border-radius:8px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.stf-i .info{flex:1}
+.stf-i .n{font-weight:700;font-size:.88rem}
+.stf-i .d{font-size:.75rem;color:var(--sec);margin-top:2px}
+.stg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.stb{padding:10px;background:#f8fafc;border-radius:7px;text-align:center}
+.stb-v{font-size:1.4rem;font-weight:700;color:var(--pri)}
+.stb-l{font-size:.7rem;color:var(--sec);margin-top:2px}
+.sv-b{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.svb{padding:10px;border-radius:7px;border:1px solid var(--brd);background:white;cursor:pointer;font-family:inherit;font-weight:600;font-size:.82rem;transition:.2s;display:flex;align-items:center;justify-content:center;gap:5px}
+.svb:hover{background:var(--pri-lt);border-color:var(--pri)}
+.svb.dng{color:var(--acc);border-color:#fca5a5}.svb.dng:hover{background:#fee2e2}
+#expC,#impC{width:100%;padding:7px;border:1px solid var(--brd);border-radius:5px;font-family:monospace;font-size:.7rem;margin-top:6px;resize:vertical;min-height:50px}
+#toasts{position:fixed;top:15px;right:15px;z-index:2000;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:320px}
+.toast{background:white;padding:10px 14px;border-radius:9px;box-shadow:0 8px 24px rgba(0,0,0,.15);border-left:4px solid var(--pri);min-width:240px;animation:ti .3s;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500}
+@keyframes ti{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.sc{border-color:var(--suc)}.toast.sc i{color:var(--suc)}
+.toast.er{border-color:var(--acc)}.toast.er i{color:var(--acc)}
+.toast.wr{border-color:var(--wrn)}.toast.wr i{color:var(--wrn)}
+.toast i{font-size:1.1rem}
+.part{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;z-index:3000;animation:pf 1s ease-out forwards}
+@keyframes pf{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-thumb{background:var(--brd);border-radius:3px}
+.quiz-q{font-size:1rem;font-weight:600;margin-bottom:15px;padding:15px;background:#f8fafc;border-radius:8px}
+.quiz-a{padding:10px;border:2px solid var(--brd);border-radius:7px;cursor:pointer;margin-bottom:8px;transition:.2s}
+.quiz-a:hover{border-color:var(--pri);background:var(--pri-lt)}
+.quiz-a.ok{border-color:var(--suc);background:#d1fae5}
+.quiz-a.no{border-color:var(--acc);background:#fee2e2}
+@media(max-width:600px){.l-title{font-size:1.8rem}.l-logo{font-size:3.5rem}.mgrid{gap:10px}.pcard,.apan{padding:14px}.ag{grid-template-columns:1fr 1fr}}
+/* ============================================
+   НАТИВНЫЙ UI И МИКРО-ИНТЕРАКЦИИ
+   ============================================ */
+
+/* 1. Эффект нажатия - кнопки "утопают" при клике */
+.btn:active, 
+.l-btn:active, 
+.tbtn:active, 
+.skb:active, 
+.svb:active,
+.chat-q:active {
+    transform: scale(0.92) !important;
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    filter: brightness(0.9);
+}
+
+/* 2. Плавные, "дорогие" модальные окна */
+.mbg {
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mbg.on {
+    opacity: 1;
+    animation: fi 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mod {
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    opacity: 0;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+.mbg.on .mod {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+/* 3. Тряска экрана при критических событиях */
+@keyframes screenShake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, -1px, 0); }
+    30%, 50%, 70% { transform: translate3d(-3px, 2px, 0); }
+    40%, 60% { transform: translate3d(3px, -2px, 0); }
+}
+.screen-shake {
+    animation: screenShake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* 4. Плавный скролл везде */
+html { 
+    scroll-behavior: smooth; 
+}
+
+/* 5. Красивые скроллбары */
+::-webkit-scrollbar { 
+    width: 6px; 
+    height: 6px; 
+}
+::-webkit-scrollbar-track { 
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb { 
+    background: rgba(100, 116, 139, 0.3); 
+    border-radius: 10px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+    background: rgba(100, 116, 139, 0.5); 
+}
+
+/* 6. Плавные переходы для всех интерактивных элементов */
+.btn, .l-btn, .tbtn, .skb, .svb, .chat-q, .dopt, .dr {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 7. Эффект свечения при наведении на важные кнопки */
+.btn.em:hover, 
+.btn.sc:hover {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+}
+.btn.em:hover {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+/* 8. Плавное появление тостов (уведомлений) */
+.toast {
+    animation: ti 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 9. Эффект пульсации для критических элементов */
+@keyframes criticalPulse {
+    0%, 100% { 
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+    }
+    50% { 
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+}
+.pcard.crit {
+    animation: criticalPulse 2s infinite;
+}
+
+/* 10. Плавное изменение цветов для витальных показателей */
+.vit {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+/* ============================================
+   СВЕЧЕНИЕ КРИТИЧЕСКИХ ПОКАЗАТЕЛЕЙ
+   ============================================ */
+
+/* Пульсирующее свечение для критических витальных показателей */
+@keyframes criticalGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(220, 38, 38, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(220, 38, 38, 0.6), 0 0 30px rgba(220, 38, 38, 0.3);
+    }
+}
+
+.vit.dng {
+    animation: criticalGlow 1.5s ease-in-out infinite;
+    border-color: #dc2626 !important;
+}
+
+/* Свечение для предупреждающих показателей */
+@keyframes warningPulse {
+    0%, 100% {
+        box-shadow: 0 0 3px rgba(245, 158, 11, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+}
+
+.vit.wrn {
+    animation: warningPulse 2s ease-in-out infinite;
+}
+
+/* Усиленное свечение для критического пациента */
+.pcard.crit::before {
+    animation: pbr 1s infinite, criticalGlow 2s ease-in-out infinite;
+}
+
+/* Свечение для иконки критического пациента */
+.av.crit {
+    animation: criticalGlow 1.5s ease-in-out infinite;
+}
+/* ============================================
+   ПЕРЕХОДЫ МЕЖДУ СЦЕНАМИ
+   ============================================ */
+
+#sceneTransition {
+    position: fixed;
+    inset: 0;
+    background: #0f172a;
+    z-index: 8000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sceneTransition.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#sceneTransition .transition-text {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#sceneTransition.active .transition-text {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+</style>
+</head>
+<body>
+<div id="stress"></div>
+<div id="loader">
+  <div class="l-logo"><i class="fas fa-heartbeat a-pulse"></i></div>
+  <div class="l-title">ПРИЁМНЫЙ ПОКОЙ</div>
+  <div class="l-sub">v17.1 • AI Dialogues & Campus</div>
+  <div class="l-bar"><div class="l-fill" id="lFill"></div></div>
+  <div class="l-fact" id="lFact">Загрузка...</div>
+  <label style="font-size:.85rem;opacity:.9">Выберите режим:</label>
+  <select id="chSel" class="l-select">
+    <option value="normal">🟢 Обычный день</option>
+    <option value="tsunami">🌊 Цунами (Таймер x2, Награда x2)</option>
+    <option value="broke">💸 Кризис (Цены x3, Награда x3)</option>
+    <option value="epidemic">🦠 Эпидемия (только инфекции)</option>
+    <option value="disaster">💥 Катастрофа (Mass Casualty)</option>
+    <option value="training">🎓 Обучение (без штрафов)</option>
+    <option value="residency">👨‍⚕️ Ординатура (с теорией и экзаменами)</option>
+  </select>
+  <div class="l-btns">
+    <button class="l-btn" id="bNew" onclick="startNew()" disabled><i class="fas fa-play"></i> Новая игра</button>
+    <button class="l-btn" id="bLoad" onclick="startLoad()" disabled><i class="fas fa-folder-open"></i> Загрузить</button>
+    <button class="l-btn dng" id="bReset" onclick="forceReset()" disabled><i class="fas fa-trash"></i> Сброс</button>
+  </div>
+  <div class="l-stat" id="lStat">Инициализация...</div>
+</div>
+<div class="epb" id="epb"><i class="fas fa-virus a-pulse"></i> РЕЖИМ ЭПИДЕМИИ • Очередь: <span id="epC">0</span></div>
+<div id="game">
+  <div class="evb" id="evb"><i class="fas fa-exclamation-triangle"></i> <span id="evT"></span></div>
+  <div class="tbar">
+    <div class="st"><div class="st-ic"><i class="fas fa-user-md"></i></div><div><div class="st-l">Ранг</div><div class="st-v" id="rnk">Интерн</div></div></div>
+    <div class="st"><div class="st-ic amb"><i class="fas fa-star a-glow"></i></div><div><div class="st-l">Уровень <span id="lvl">1</span></div><div class="xpb"><div class="xpf" id="xpF"></div></div><div style="font-size:.65rem;color:var(--sec);margin-top:1px"><span id="xp">0</span>/<span id="xpM">50</span></div></div></div>
+    <div class="st"><div class="st-ic grn"><i class="fas fa-coins"></i></div><div><div class="st-l">Бюджет</div><div class="st-v" style="color:var(--suc)">$<span id="mny">1000</span></div></div></div>
+    <div class="st"><div class="st-ic"><i class="fas fa-chart-line"></i></div><div><div class="st-l">Репутация</div><div class="st-v"><span id="rep">50</span>/100</div></div></div>
+    <div class="st"><div class="st-ic"><i class="fas fa-user-injured"></i></div><div><div class="st-l">Вылечено</div><div class="st-v"><span id="cur">0</span></div></div></div>
+    <div class="st"><div class="st-ic red"><i class="fas fa-skull"></i></div><div><div class="st-l">Потери</div><div class="st-v"><span id="dth">0</span></div></div></div>
+    <div class="st"><div class="st-ic amb"><i class="fas fa-clock"></i></div><div><div class="st-l">Время</div><div class="st-v"><span id="tmr">90</span>с</div></div></div>
+  </div>
+  <div class="mgrid">
+    <div class="pcard" id="pCard">
+      <div class="phdr">
+        <div class="av" id="av"><i class="fas fa-user-injured"></i><div class="dot"></div></div>
+        <div class="pinfo"><h2 id="pN">Пациент №1</h2><div class="meta" id="pM">Мужчина, 45 лет</div><span class="tbadge t-grn" id="tB">Стабильный</span></div>
+      </div>
+      <div class="trust"><div class="trust-l"><span>ДОВЕРИЕ ПАЦИЕНТА</span><span id="trV">100%</span></div><div class="trust-b"><div class="trust-f" id="trF"></div></div></div>
+      <div class="cmp" id="cmp"><i class="fas fa-comment-medical"></i> <span id="cmpT">Ожидание...</span></div>
+      <div class="o3d-scene">
+        <div class="o3d-organ" id="organ3d">
+          <div class="o3d-face o3d-front" id="oFr"></div>
+          <div class="o3d-face o3d-back" id="oBk">ОРГАН</div>
+          <div class="o3d-face o3d-left" id="oLf">?</div>
+          <div class="o3d-face o3d-right" id="oRt">?</div>
+          <div class="o3d-face o3d-top" id="oTp">?</div>
+          <div class="o3d-face o3d-bottom" id="oBt">?</div>
+        </div>
+      </div>
+      <div class="ecg-c"><div class="ecg-lb" id="eLb">SINUS RHYTHM</div><div class="ecg-hr" id="eHr">-- BPM</div><canvas id="ecg"></canvas></div>
+      <div class="vits">
+        <div class="vit" id="vBP"><div class="vit-lb"><i class="fas fa-heart a-pulse"></i> АД</div><div class="vit-v"><span id="bp">--/--</span><span class="vit-u">мм рт.ст.</span></div></div>
+        <div class="vit" id="vHR"><div class="vit-lb"><i class="fas fa-wave-square"></i> Пульс</div><div class="vit-v"><span id="hr">--</span><span class="vit-u">уд/мин</span></div></div>
+        <div class="vit" id="vT"><div class="vit-lb"><i class="fas fa-thermometer-half a-shake"></i> Темп.</div><div class="vit-v"><span id="tp">--</span><span class="vit-u">°C</span></div></div>
+        <div class="vit" id="vS"><div class="vit-lb"><i class="fas fa-lungs"></i> SpO₂</div><div class="vit-v"><span id="sp">--</span><span class="vit-u">%</span></div></div>
+      </div>
+      <div class="inf"><i class="fas fa-vial"></i> Анализы: <b id="tst">не проведены</b></div>
+      <div class="inf"><i class="fas fa-notes-medical"></i> Диагноз: <b id="dgD">не установлен</b></div>
+      <div class="inf"><i class="fas fa-allergies"></i> Аллергии: <b id="alD">не выявлены</b></div>
+      <div class="log" id="pLog"><div style="font-weight:600;margin-bottom:3px"><i class="fas fa-history"></i> Журнал:</div></div>
+    </div>
+    <div class="apan">
+      <div class="pt">Действия</div>
+      <div class="ag">
+        <button class="btn em" onclick="emerg()"><i class="fas fa-syringe a-float"></i>АДРЕНАЛИН<br><small>$200</small></button>
+        <button class="btn" onclick="buyTime()"><i class="fas fa-hourglass-half"></i>ВРЕМЯ<br><small>+30с $100</small></button>
+        <button class="btn" onclick="openChat()"><i class="fas fa-comments"></i>ОПРОС</button>
+        <button class="btn" onclick="oM('exam')"><i class="fas fa-stethoscope"></i>ОСМОТР</button>
+        <button class="btn" onclick="oM('diag')"><i class="fas fa-microscope"></i>ДИАГНОЗ</button>
+        <button class="btn" onclick="oM('drugs')"><i class="fas fa-pills"></i>ЛЕЧЕНИЕ</button>
+        <button class="btn" onclick="startSurg()"><i class="fas fa-scalpel"></i>ОПЕРАЦИЯ</button>
+        <button class="btn" onclick="hosp()"><i class="fas fa-procedures"></i>СТАЦИОНАР</button>
+        <button class="btn sc" onclick="disch()"><i class="fas fa-home"></i>ВЫПИСАТЬ</button>
+        <button class="btn" onclick="next()"><i class="fas fa-forward"></i>СЛЕДУЮЩИЙ</button>
+        <button class="btn vio" onclick="consult()"><i class="fas fa-user-tie"></i>КОНСИЛИУМ<br><small>$400</small></button>
+        <button class="btn sc" id="btnAdmit" onclick="toggleAdmit()"><i class="fas fa-door-open"></i>ПРИЁМ<br><small>Открыт</small></button>
+        <button class="btn" id="btnMusic" onclick="toggleMusic()" style="background:#1e293b;color:white"><i class="fas fa-music" id="musicIcon"></i>МУЗЫКА<br><small id="musicStatus">Выкл</small></button>
+      </div>
+      <div class="pt">Менеджмент</div>
+      <div class="tbar2">
+        <button class="tbtn" onclick="oM('skills')"><i class="fas fa-brain"></i>Навыки</button>
+        <button class="tbtn" onclick="oM('inv')"><i class="fas fa-boxes"></i>Склад</button>
+        <button class="tbtn" onclick="oM('staff')"><i class="fas fa-users"></i>Персонал</button>
+        <button class="tbtn" onclick="oM('equip')"><i class="fas fa-tools"></i>Оборудование</button>
+        <button class="tbtn" onclick="oM('campus')"><i class="fas fa-hospital"></i>Кампус</button>
+        <button class="tbtn" onclick="oM('residency')"><i class="fas fa-graduation-cap"></i>Ординатура</button>
+        <button class="tbtn" onclick="oM('ward')"><i class="fas fa-procedures"></i>Стационар</button>
+        <button class="tbtn" onclick="oM('pharma')"><i class="fas fa-book-medical"></i>Справочник</button>
+        <button class="tbtn" onclick="oM('ach')"><i class="fas fa-trophy"></i>Достижения</button>
+        <button class="tbtn" onclick="oM('stats')"><i class="fas fa-chart-bar"></i>Статистика</button>
+        <button class="tbtn" onclick="oM('save')"><i class="fas fa-save"></i>Сохранить</button>
+        <button class="tbtn" onclick="oM('load')"><i class="fas fa-folder-open"></i>Загрузить</button>
+        <button class="tbtn" onclick="exitToMenu()" style="color:#dc2626"><i class="fas fa-sign-out-alt"></i>ВЫХОД</button>
+        <button class="tbtn" onclick="changeMode()"><i class="fas fa-exchange-alt"></i>РЕЖИМ</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mbg" id="m-exam"><div class="mod"><div class="mhdr"><h3><i class="fas fa-stethoscope"></i> Обследование</h3><button class="mcls" onclick="cM('exam')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Каждый тест снижает доверие пациента!</p><div class="ag" style="grid-template-columns:1fr 1fr"><button class="btn" onclick="doExam('ausc',50)"><i class="fas fa-stethoscope"></i>Аускультация<br><small id="p_a">$50</small></button><button class="btn" onclick="doExam('xray',150)"><i class="fas fa-x-ray"></i>Рентген<br><small id="p_x">$150</small></button><button class="btn" onclick="doExam('us',200)"><i class="fas fa-wave-square"></i>УЗИ<br><small id="p_u">$200</small></button><button class="btn" onclick="doExam('ecg',100)"><i class="fas fa-heartbeat"></i>ЭКГ<br><small id="p_e">$100</small></button><button class="btn" onclick="doExam('blood',250)" style="grid-column:span 2"><i class="fas fa-vial"></i>РАЗВЁРНУТЫЙ АНАЛИЗ КРОВИ<br><small id="p_b">$250</small></button><button class="btn" onclick="doExam('ct',500)" style="grid-column:span 2"><i class="fas fa-brain"></i>КТ / МРТ<br><small id="p_c">$500</small></button></div><div id="exR" style="margin-top:12px;padding:10px;background:#f8fafc;border-radius:7px;font-size:.85rem;display:none"></div></div></div>
+<div class="mbg" id="m-diag"><div class="mod"><div class="mhdr"><h3><i class="fas fa-microscope"></i> Установка диагноза</h3><button class="mcls" onclick="cM('diag')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Ошибка: -$100, -15 доверия, -10 репутации</p><div class="dlist" id="dL"></div></div></div>
+<div class="mbg" id="m-drugs"><div class="mod"><div class="mhdr"><h3><i class="fas fa-pills"></i> Назначить лечение</h3><button class="mcls" onclick="cM('drugs')">✕</button></div><div style="padding:8px;background:#fef3c7;border-radius:6px;margin-bottom:10px;font-size:.82rem"><i class="fas fa-exclamation-triangle"></i> Аллергии: <b id="al2">нет данных</b></div><div class="drl" id="dRL"></div><button class="btn sc" style="margin-top:10px;width:100%;flex-direction:row" onclick="prescribe()"><i class="fas fa-check"></i>Назначить</button></div></div>
+<div class="mbg" id="m-skills"><div class="mod"><div class="mhdr"><h3><i class="fas fa-brain"></i> Дерево навыков</h3><button class="mcls" onclick="cM('skills')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Очков навыков: <b id="spN">0</b></p><div class="sg" id="sG"></div></div></div>
+<div class="mbg" id="m-inv"><div class="mod"><div class="mhdr"><h3><i class="fas fa-boxes"></i> Склад лекарств</h3><button class="mcls" onclick="cM('inv')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Закупайте лекарства оптом. Цены колеблются!</p><div class="inv-g" id="iG"></div></div></div>
+<div class="mbg" id="m-staff"><div class="mod"><div class="mhdr"><h3><i class="fas fa-users"></i> Персонал больницы</h3><button class="mcls" onclick="cM('staff')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Нанимайте персонал для автоматизации</p><div class="stf-g" id="stfG"></div></div></div>
+<div class="mbg" id="m-equip"><div class="mod"><div class="mhdr"><h3><i class="fas fa-tools"></i> Оборудование</h3><button class="mcls" onclick="cM('equip')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Следите за состоянием оборудования!</p><div class="stf-g" id="eqG"></div></div></div>
+<div class="mbg" id="m-campus"><div class="mod"><div class="mhdr"><h3><i class="fas fa-hospital"></i> Кампус больницы</h3><button class="mcls" onclick="cM('campus')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Стройте корпуса для расширения возможностей!</p><div class="campus" id="campusMap"></div></div></div>
+<div class="mbg" id="m-residency"><div class="mod"><div class="mhdr"><h3><i class="fas fa-graduation-cap"></i> Ординатура</h3><button class="mcls" onclick="cM('residency')">✕</button></div><div id="resContent"></div></div></div>
+<div class="mbg" id="m-pharma"><div class="mod"><div class="mhdr"><h3><i class="fas fa-book-medical"></i> Фармакологический справочник</h3><button class="mcls" onclick="cM('pharma')">✕</button></div><div class="drl" id="phL"></div></div></div>
+<div class="mbg" id="m-ward"><div class="mod"><div class="mhdr"><h3><i class="fas fa-procedures"></i> Стационар</h3><button class="mcls" onclick="cM('ward')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Койки: <span id="wO">0</span>/8</p><div class="wg" id="wG"></div></div></div>
+<div class="mbg" id="m-ach"><div class="mod"><div class="mhdr"><h3><i class="fas fa-trophy"></i> Достижения</h3><button class="mcls" onclick="cM('ach')">✕</button></div><div class="al" id="aL"></div></div></div>
+<div class="mbg" id="m-stats"><div class="mod"><div class="mhdr"><h3><i class="fas fa-chart-bar"></i> Статистика</h3><button class="mcls" onclick="cM('stats')">✕</button></div><div class="stg" id="stG"></div></div></div>
+<div class="mbg" id="m-save"><div class="mod"><div class="mhdr"><h3><i class="fas fa-save"></i> Сохранение</h3><button class="mcls" onclick="cM('save')">✕</button></div><p style="color:var(--sec);font-size:.85rem;margin-bottom:10px">Автосохранение каждые 30 секунд</p><div class="sv-b"><button class="svb" onclick="save()"><i class="fas fa-save"></i> Сохранить</button><button class="svb" onclick="expSv()"><i class="fas fa-file-export"></i> Экспорт</button></div><div id="exA" style="display:none;margin-top:8px"><label style="font-size:.75rem;color:var(--sec)">Код сохранения:</label><textarea id="expC" readonly></textarea></div><div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--brd);font-size:.75rem;color:var(--sec)"><i class="fas fa-info-circle"></i> Последнее: <span id="lstSv">никогда</span></div></div></div>
+<div class="mbg" id="m-load"><div class="mod"><div class="mhdr"><h3><i class="fas fa-folder-open"></i> Загрузка</h3><button class="mcls" onclick="cM('load')">✕</button></div><div class="sv-b"><button class="svb" onclick="load()"><i class="fas fa-folder-open"></i> Загрузить</button><button class="svb" onclick="impSv()"><i class="fas fa-file-import"></i> Импорт</button></div><div id="imA" style="display:none;margin-top:8px"><label style="font-size:.75rem;color:var(--sec)">Вставьте код:</label><textarea id="impC" placeholder="Вставьте код сюда..."></textarea><button class="svb" style="width:100%;margin-top:6px" onclick="doImp()"><i class="fas fa-check"></i> Загрузить</button></div><div class="sv-b" style="margin-top:10px"><button class="svb dng" onclick="reset()"><i class="fas fa-trash"></i> Сброс</button></div></div></div>
+<div class="mbg" id="m-chat"><div class="mod"><div class="mhdr"><h3><i class="fas fa-comments"></i> Диалог с пациентом</h3><button class="mcls" onclick="cM('chat')">✕</button></div><div class="chat-box" id="chatBox"></div><div class="chat-questions" id="chatQ"></div></div></div>
+<div class="mbg" id="m-mg"><div class="mod" style="max-width:700px"><div class="mhdr"><h3 id="mgT"><i class="fas fa-gamepad"></i> Мини-игра</h3><button class="mcls" onclick="cancelMG()">✕</button></div><div class="mga" id="mgA"></div><div style="margin-top:8px;text-align:center;color:var(--sec);font-size:.82rem" id="mgH"></div></div></div>
+<div id="toasts"></div>
+<script>
+const G={money:1000,xp:0,xpM:50,lvl:1,cur:0,dth:0,tmr:90,maxT:90,running:false,patient:null,pCnt:0,epi:false,epiQ:[],ward:Array(8).fill(null),sp:0,skills:{therapy:0,surgery:0,comm:0,diag:0,pharma:0},selDrug:null,ach:new Set(),events:{vip:false},rep:50,stats:{totD:0,corD:0,totS:0,sucS:0,totE:0,avgT:0,playT:0},lastSv:null,surgC:0,trust:100,challenge:'normal',inventory:{},staff:{nurses:0,orderlies:0,residents:0},equipment:{xray:100,us:100,ct:100,ecg:100,lab:100},prices:{},started:false,campus:{er:true,icu:false,surgery:false,lab:false,imaging:false,pharmacy:false,maternity:false,rehab:false},residencyLevel:0,residencyExam:0,residencyTheory:{},selPatient:null,prescribeForWard:false,admitOpen:true,returnPatients:[],};
+const SK='hospital_v17_save';
+const RANKS=[{n:'Интерн',l:1},{n:'Ординатор',l:3},{n:'Лечащий врач',l:6},{n:'Зав. отделением',l:10},{n:'Главврач',l:15}];
+const ORGANS={heart:'🫀',lungs:'🫁',brain:'🧠',bone:'🦴',kidney:'🫘',liver:'🫁',stomach:'🟡',blood:'🩸',skin:'🟥',thyroid:'🦋',bowel:'🟤',pancreas:'🟠'};
+const ORGAN_NAMES={heart:'Сердце',lungs:'Лёгкие',brain:'Мозг',bone:'Кость',kidney:'Почка',liver:'Печень',stomach:'Желудок',blood:'Кровь',skin:'Кожа',thyroid:'Щитовидная',bowel:'Кишечник',pancreas:'Поджелудочная'};
+const SYMPTOMS={heart:['боль за грудиной','отдаёт в левую руку','холодный пот','перебои в работе сердца','одышка при нагрузке','отёки ног'],lungs:['кашель','трудно дышать','свистящее дыхание','кровохарканье','боль в груди при дыхании'],brain:['слабость в руке','нарушение речи','асимметрия лица','головная боль','потеря сознания','судороги','головокружение'],bone:['боль в ноге','не могу наступить','отёк','деформация','острая боль в пояснице'],kidney:['боль в пояснице','кровь в моче','частое мочеиспускание','боль при мочеиспускании'],liver:['желтуха','тяжесть в правом подреберье','увеличение живота','слабость'],stomach:['боль в животе','тошнота','рвота','диарея','вздутие живота','изжога'],blood:['высокая температура','озноб','спутанность сознания','сыпь','бледность','слабость'],skin:['сыпь','покраснение','зуд','волдыри','отёк лица'],thyroid:['усталость','увеличение веса','зябкость','возбуждение','потеря веса','сердцебиение'],bowel:['вздутие живота','не было стула','рвота','боль в животе'],pancreas:['опоясывающая боль','рвота после алкоголя','слабость','жажда']};
+const DISEASES=[
+  {id:'mi',name:'Инфаркт миокарда',organ:'heart',vit:{bp:'90/60',hr:110,t:36.6,sp:92},blood:{hb:130,wbc:9000,plt:250,glu:6.0,trop:'ВЫСОКИЙ',crp:15,esr:10,creat:80,alt:30,k:4.2},ex:{ecg:'Подъём ST V2-V4',ausc:'Приглушённые тоны'},drug:'anticoag',diff:3,ecg:'stemi',inf:false,theory:'<b>Инфаркт миокарда</b> — острое нарушение кровоснабжения сердечной мышцы.<br><b>Симптомы:</b> боль за грудиной, холодный пот.<br><b>Диагностика:</b> ЭКГ (подъём ST), тропонин.<br><b>Лечение:</b> антикоагулянты, тромболизис.'},
+  {id:'pneu',name:'Пневмония',organ:'lungs',vit:{bp:'110/70',hr:95,t:39.0,sp:89},blood:{hb:125,wbc:15000,plt:300,glu:5.5,trop:'-',crp:80,esr:45,creat:75,alt:25,k:4.0},ex:{ausc:'Хрипы снизу',xray:'Затемнение'},drug:'antibio',diff:1,ecg:'sinus_tachy',inf:true,theory:'<b>Пневмония</b> — воспаление лёгочной ткани.<br><b>Симптомы:</b> кашель, температура 39, одышка.<br><b>Диагностика:</b> рентген (затемнение).<br><b>Лечение:</b> антибиотики.'},
+  {id:'stroke',name:'Инсульт',organ:'brain',vit:{bp:'180/110',hr:80,t:36.8,sp:96},blood:{hb:140,wbc:8000,plt:220,glu:7.0,trop:'-',crp:5,esr:15,creat:85,alt:28,k:4.1},ex:{ct:'Очаг ишемии'},drug:'thrombo',diff:4,ecg:'afib',inf:false,theory:'<b>Инсульт</b> — нарушение мозгового кровообращения.<br><b>Симптомы:</b> асимметрия лица, слабость в руке (FAST).<br><b>Диагностика:</b> КТ/МРТ.<br><b>Лечение:</b> тромболизис.'},
+  {id:'appen',name:'Аппендицит',organ:'stomach',vit:{bp:'120/80',hr:90,t:37.8,sp:98},blood:{hb:135,wbc:14000,plt:280,glu:5.0,trop:'-',crp:40,esr:20,creat:70,alt:22,k:3.9},ex:{us:'Аппендикс 12мм'},drug:'surgery',diff:2,ecg:'normal',inf:false,theory:'<b>Аппендицит</b> — воспаление отростка слепой кишки.<br><b>Симптомы:</b> боль справа внизу, тошнота.<br><b>Лечение:</b> аппендэктомия.'},
+  {id:'fract',name:'Перелом бедра',organ:'bone',vit:{bp:'100/70',hr:100,t:36.7,sp:97},blood:{hb:110,wbc:7000,plt:200,glu:5.2,trop:'-',crp:8,esr:12,creat:80,alt:25,k:4.0},ex:{xray:'Перелом шейки'},drug:'pain',diff:2,ecg:'normal',inf:false,theory:'<b>Перелом шейки бедра</b> — травма у пожилых.<br><b>Лечение:</b> хирургическая фиксация.'},
+  {id:'asthma',name:'Бронхиальная астма',organ:'lungs',vit:{bp:'130/85',hr:115,t:36.7,sp:85},blood:{hb:135,wbc:9500,plt:250,glu:5.5,trop:'-',crp:5,esr:8,creat:75,alt:22,k:4.1},ex:{ausc:'Сухие свистящие хрипы'},drug:'broncho',diff:2,ecg:'sinus_tachy',inf:false,theory:'<b>Бронхиальная астма</b> — хроническое воспаление дыхательных путей.<br><b>Лечение:</b> бронходилататоры.'},
+  {id:'dka',name:'Диабетический кетоацидоз',organ:'pancreas',vit:{bp:'100/70',hr:105,t:36.5,sp:97},blood:{hb:120,wbc:11000,plt:230,glu:25.0,trop:'-',crp:10,esr:15,creat:90,alt:30,k:5.8},ex:{blood:'Кетоны ++'},drug:'insulin',diff:3,ecg:'normal',inf:false,theory:'<b>ДКА</b> — осложнение диабета.<br><b>Симптомы:</b> запах ацетона, жажда.<br><b>Лечение:</b> инсулин.'},
+  {id:'sepsis',name:'Сепсис',organ:'blood',vit:{bp:'80/50',hr:125,t:39.8,sp:90},blood:{hb:100,wbc:22000,plt:80,glu:4.0,trop:'-',crp:200,esr:80,creat:150,alt:45,k:4.5},ex:{blood:'Прокальцитонин ++'},drug:'antibio',diff:4,ecg:'sinus_tachy',inf:true,theory:'<b>Сепсис</b> — системная реакция на инфекцию.<br><b>Лечение:</b> антибиотики широкого спектра.'},
+  {id:'pe',name:'ТЭЛА',organ:'lungs',vit:{bp:'90/60',hr:130,t:37.2,sp:82},blood:{hb:130,wbc:9500,plt:260,glu:5.5,trop:'+',crp:15,esr:20,creat:85,alt:28,k:4.2},ex:{ct:'Дефект наполнения',ecg:'S1Q3T3'},drug:'anticoag',diff:5,ecg:'sinus_tachy',inf:false,theory:'<b>ТЭЛА</b> — закупорка лёгочной артерии тромбом.<br><b>Лечение:</b> антикоагулянты.'},
+  {id:'mening',name:'Менингит',organ:'brain',vit:{bp:'140/90',hr:100,t:40.0,sp:96},blood:{hb:130,wbc:20000,plt:250,glu:3.5,trop:'-',crp:120,esr:50,creat:80,alt:30,k:4.0},ex:{ct:'Отёк оболочек'},drug:'antibio',diff:4,ecg:'normal',inf:true,theory:'<b>Менингит</b> — воспаление оболочек мозга.<br><b>Симптомы:</b> ригидность затылка, симптом Кернига.<br><b>Лечение:</b> цефтриаксон.'},
+  {id:'renal',name:'Почечная колика',organ:'kidney',vit:{bp:'150/90',hr:110,t:37.0,sp:98},blood:{hb:135,wbc:9000,plt:240,glu:5.2,trop:'-',crp:10,esr:8,creat:110,alt:25,k:4.3},ex:{us:'Камень'},drug:'pain',diff:2,ecg:'normal',inf:false,theory:'<b>Почечная колика</b> — камень в мочеточнике.<br><b>Лечение:</b> обезболивание.'},
+  {id:'burns',name:'Термические ожоги',organ:'skin',vit:{bp:'100/70',hr:105,t:37.5,sp:97},blood:{hb:145,wbc:12000,plt:280,glu:6.5,trop:'-',crp:30,esr:15,creat:85,alt:28,k:4.0},ex:{ausc:'Ожог II степени'},drug:'ivfluid',diff:3,ecg:'normal',inf:false,theory:'<b>Ожоги</b> — повреждение тканей высокой температурой.<br><b>Лечение:</b> инфузии, перевязки.'},
+  {id:'anaph',name:'Анафилактический шок',organ:'blood',vit:{bp:'60/40',hr:140,t:36.8,sp:78},blood:{hb:130,wbc:11000,plt:250,glu:5.0,trop:'-',crp:5,esr:10,creat:80,alt:25,k:4.1},ex:{ausc:'Стридор'},drug:'cortico',diff:5,ecg:'sinus_tachy',inf:false,theory:'<b>Анафилаксия</b> — тяжёлая аллергия.<br><b>Лечение:</b> адреналин, кортикостероиды.'},
+  {id:'pneumot',name:'Пневмоторакс',organ:'lungs',vit:{bp:'100/70',hr:115,t:36.9,sp:88},blood:{hb:130,wbc:9500,plt:240,glu:5.5,trop:'-',crp:10,esr:12,creat:80,alt:25,k:4.0},ex:{xray:'Нет лёгочного рисунка'},drug:'surgery',diff:4,ecg:'sinus_tachy',inf:false,theory:'<b>Пневмоторакс</b> — воздух в плевральной полости.<br><b>Лечение:</b> дренирование.'},
+  {id:'ulcer',name:'Прободная язва',organ:'stomach',vit:{bp:'90/60',hr:110,t:37.8,sp:96},blood:{hb:105,wbc:14000,plt:250,glu:5.0,trop:'-',crp:50,esr:25,creat:80,alt:28,k:4.0},ex:{xray:'Газ под диафрагмой'},drug:'surgery',diff:3,ecg:'normal',inf:false,theory:'<b>Прободная язва</b> — сквозной дефект стенки желудка.<br><b>Лечение:</b> экстренная операция.'},
+  {id:'epilep',name:'Эпилептический статус',organ:'brain',vit:{bp:'160/100',hr:120,t:38.5,sp:90},blood:{hb:130,wbc:10000,plt:240,glu:4.5,trop:'-',crp:10,esr:10,creat:85,alt:25,k:4.2},ex:{ct:'Нет очагов'},drug:'sedat',diff:4,ecg:'sinus_tachy',inf:false,theory:'<b>Эпилептический статус</b> — судороги >30 минут.<br><b>Лечение:</b> диазепам в/в.'},
+  {id:'tb',name:'Туберкулёз',organ:'lungs',vit:{bp:'110/70',hr:88,t:37.8,sp:91},blood:{hb:105,wbc:8500,plt:300,glu:5.0,trop:'-',crp:30,esr:60,creat:75,alt:30,k:4.0},ex:{xray:'Каверны'},drug:'antibio',diff:3,ecg:'normal',inf:true,theory:'<b>Туберкулёз</b> — Mycobacterium tuberculosis.<br><b>Лечение:</b> 6-9 мес антибиотиков.'},
+  {id:'food',name:'Пищевое отравление',organ:'stomach',vit:{bp:'100/65',hr:95,t:37.5,sp:97},blood:{hb:130,wbc:11000,plt:240,glu:4.8,trop:'-',crp:15,esr:10,creat:80,alt:22,k:3.5},ex:{us:'Норма'},drug:'ivfluid',diff:1,ecg:'normal',inf:true,theory:'<b>Пищевое отравление</b> — недоброкачественная пища.<br><b>Лечение:</b> регидратация.'},
+  {id:'malaria',name:'Малярия',organ:'blood',vit:{bp:'105/70',hr:105,t:39.5,sp:94},blood:{hb:90,wbc:4000,plt:80,glu:4.0,trop:'-',crp:50,esr:70,creat:110,alt:60,k:3.8},ex:{blood:'Плазмодий'},drug:'antibio',diff:4,ecg:'sinus_tachy',inf:true,theory:'<b>Малярия</b> — паразиты от комаров.<br><b>Лечение:</b> артемизинин.'},
+  {id:'lyme',name:'Болезнь Лайма',organ:'skin',vit:{bp:'115/75',hr:85,t:37.6,sp:98},blood:{hb:135,wbc:8000,plt:230,glu:5.2,trop:'-',crp:20,esr:30,creat:75,alt:28,k:4.1},ex:{blood:'Антитела к боррелиям'},drug:'antibio',diff:3,ecg:'av_block',inf:true,theory:'<b>Болезнь Лайма</b> — клещевой боррелиоз.<br><b>Лечение:</b> доксициклин.'},
+  {id:'hepat',name:'Гепатит B',organ:'liver',vit:{bp:'110/70',hr:80,t:37.4,sp:97},blood:{hb:120,wbc:6000,plt:150,glu:4.5,trop:'-',crp:25,esr:35,creat:80,alt:850,k:4.0},ex:{us:'Увеличенная печень'},drug:'ivfluid',diff:3,ecg:'normal',inf:true,theory:'<b>Гепатит B</b> — вирусное воспаление печени.<br><b>Диагностика:</b> HBsAg, АЛТ/АСТ.'},
+  {id:'pancr',name:'Панкреатит',organ:'pancreas',vit:{bp:'100/65',hr:100,t:37.7,sp:96},blood:{hb:135,wbc:13000,plt:260,glu:7.5,trop:'-',crp:80,esr:25,creat:95,alt:80,k:3.8},ex:{us:'Отёк поджелудочной'},drug:'ivfluid',diff:3,ecg:'normal',inf:false,theory:'<b>Панкреатит</b> — воспаление поджелудочной.<br><b>Лечение:</b> голод, холод, покой.'},
+  {id:'chole',name:'Холецистит',organ:'liver',vit:{bp:'120/80',hr:90,t:38.0,sp:97},blood:{hb:130,wbc:13000,plt:250,glu:5.5,trop:'-',crp:40,esr:20,creat:80,alt:60,k:4.0},ex:{us:'Камни в желчном'},drug:'surgery',diff:2,ecg:'normal',inf:false,theory:'<b>Холецистит</b> — воспаление желчного пузыря.<br><b>Лечение:</b> холецистэктомия.'},
+  {id:'hycrisis',name:'Гипертонический криз',organ:'heart',vit:{bp:'200/120',hr:95,t:36.7,sp:96},blood:{hb:140,wbc:8500,plt:230,glu:5.8,trop:'-',crp:5,esr:10,creat:110,alt:28,k:4.2},ex:{ecg:'Гипертрофия ЛЖ'},drug:'antiht',diff:2,ecg:'lvh',inf:false,theory:'<b>Гипертонический криз</b> — резкое повышение АД.<br><b>Лечение:</b> нифедипин, каптоприл.'},
+  {id:'hypogly',name:'Гипогликемия',organ:'pancreas',vit:{bp:'90/60',hr:110,t:36.2,sp:95},blood:{hb:125,wbc:8000,plt:230,glu:2.5,trop:'-',crp:3,esr:8,creat:75,alt:22,k:4.0},ex:{blood:'Глюкоза 2.5'},drug:'glucose',diff:3,ecg:'normal',inf:false,theory:'<b>Гипогликемия</b> — глюкоза <3.9 ммоль/л.<br><b>Лечение:</b> глюкоза 40% в/в.'},
+  {id:'co',name:'Отравление CO',organ:'blood',vit:{bp:'105/70',hr:100,t:36.8,sp:85},blood:{hb:150,wbc:9000,plt:240,glu:5.5,trop:'-',crp:5,esr:10,creat:80,alt:25,k:4.1},ex:{ecg:'Ишемия'},drug:'ivfluid',diff:4,ecg:'ischemia',inf:false,theory:'<b>Отравление CO</b> — связывание CO с гемоглобином.<br><b>Лечение:</b> 100% кислород.'},
+  {id:'angina',name:'Стенокардия',organ:'heart',vit:{bp:'140/90',hr:88,t:36.6,sp:97},blood:{hb:135,wbc:8000,plt:240,glu:5.8,trop:'-',crp:5,esr:10,creat:80,alt:25,k:4.1},ex:{ecg:'Депрессия ST'},drug:'nitrates',diff:2,ecg:'ischemia',inf:false,theory:'<b>Стенокардия</b> — ишемия миокарда.<br><b>Лечение:</b> нитраты, бета-блокаторы.'},
+  {id:'afib',name:'Фибрилляция предсердий',organ:'heart',vit:{bp:'110/70',hr:130,t:36.7,sp:95},blood:{hb:130,wbc:8500,plt:230,glu:5.5,trop:'-',crp:5,esr:12,creat:80,alt:25,k:4.0},ex:{ecg:'Нет P-волн'},drug:'antiarr',diff:3,ecg:'afib',inf:false,theory:'<b>ФП</b> — хаотичное сокращение предсердий.<br><b>Лечение:</b> антиаритмики, антикоагулянты.'},
+  {id:'bronch',name:'Бронхит',organ:'lungs',vit:{bp:'115/75',hr:85,t:37.6,sp:96},blood:{hb:135,wbc:9500,plt:240,glu:5.2,trop:'-',crp:15,esr:15,creat:75,alt:22,k:4.0},ex:{xray:'Усиление рисунка'},drug:'broncho',diff:1,ecg:'normal',inf:true,theory:'<b>Бронхит</b> — воспаление бронхов.<br><b>Лечение:</b> бронхолитики.'},
+  {id:'gastr',name:'Гастрит',organ:'stomach',vit:{bp:'120/80',hr:80,t:37.0,sp:98},blood:{hb:130,wbc:7500,plt:230,glu:5.0,trop:'-',crp:3,esr:8,creat:75,alt:22,k:4.0},ex:{ausc:'Болезненность эпигастрия'},drug:'antacid',diff:1,ecg:'normal',inf:false,theory:'<b>Гастрит</b> — воспаление слизистой желудка.<br><b>Лечение:</b> ИПП, антациды.'},
+  {id:'anemia',name:'Анемия',organ:'blood',vit:{bp:'100/65',hr:95,t:36.6,sp:97},blood:{hb:75,wbc:6000,plt:250,glu:5.0,trop:'-',crp:3,esr:20,creat:75,alt:22,k:4.0},ex:{blood:'Hb 75'},drug:'iron',diff:2,ecg:'sinus_tachy',inf:false,theory:'<b>ЖДА</b> — дефицит железа.<br><b>Лечение:</b> препараты железа.'},
+  {id:'hypo',name:'Гипотиреоз',organ:'thyroid',vit:{bp:'100/65',hr:60,t:36.0,sp:97},blood:{hb:115,wbc:6500,plt:220,glu:4.8,trop:'-',crp:3,esr:15,creat:80,alt:25,k:4.1},ex:{blood:'ТТГ повышен'},drug:'thyroid',diff:2,ecg:'sinus_brady',inf:false,theory:'<b>Гипотиреоз</b> — снижение функции щитовидной.<br><b>Лечение:</b> L-тироксин.'},
+  {id:'gout',name:'Подагра',organ:'bone',vit:{bp:'130/85',hr:85,t:37.3,sp:98},blood:{hb:140,wbc:10000,plt:250,glu:5.5,trop:'-',crp:30,esr:25,creat:90,alt:28,k:4.2},ex:{xray:'Ураты'},drug:'colchicine',diff:2,ecg:'normal',inf:false,theory:'<b>Подагра</b> — отложение уратов.<br><b>Лечение:</b> колхицин.'},
+  {id:'migr',name:'Мигрень',organ:'brain',vit:{bp:'130/85',hr:80,t:36.7,sp:98},blood:{hb:130,wbc:7000,plt:230,glu:5.2,trop:'-',crp:2,esr:8,creat:75,alt:22,k:4.0},ex:{ct:'Норма'},drug:'pain',diff:1,ecg:'normal',inf:false,theory:'<b>Мигрень</b> — первичная головная боль.<br><b>Лечение:</b> триптаны.'},
+  {id:'pyelo',name:'Пиелонефрит',organ:'kidney',vit:{bp:'120/80',hr:100,t:39.0,sp:97},blood:{hb:125,wbc:15000,plt:260,glu:5.2,trop:'-',crp:60,esr:40,creat:110,alt:28,k:4.0},ex:{us:'Расширение ЧЛС'},drug:'antibio',diff:2,ecg:'sinus_tachy',inf:true,theory:'<b>Пиелонефрит</b> — воспаление почечной лоханки.<br><b>Лечение:</b> антибиотики.'},
+  {id:'opioid',name:'Передозировка опиоидов',organ:'brain',vit:{bp:'80/50',hr:50,t:35.5,sp:75},blood:{hb:130,wbc:7500,plt:230,glu:4.5,trop:'-',crp:3,esr:8,creat:80,alt:22,k:4.0},ex:{ausc:'Угнетение дыхания'},drug:'naloxone',diff:4,ecg:'sinus_brady',inf:false,theory:'<b>Передозировка опиоидов</b> — угнетение ЦНС.<br><b>Лечение:</b> налоксон.'},
+  {id:'cirrh',name:'Цирроз печени',organ:'liver',vit:{bp:'100/65',hr:85,t:37.0,sp:96},blood:{hb:90,wbc:4000,plt:80,glu:4.5,trop:'-',crp:15,esr:30,creat:120,alt:120,k:3.8},ex:{us:'Асцит'},drug:'ivfluid',diff:3,ecg:'normal',inf:false,theory:'<b>Цирроз</b> — фиброз печени.<br><b>Лечение:</b> симптоматическое.'},
+  {id:'reninf',name:'Инфаркт почки',organ:'kidney',vit:{bp:'160/90',hr:100,t:37.5,sp:97},blood:{hb:130,wbc:11000,plt:250,glu:5.8,trop:'-',crp:25,esr:35,creat:180,alt:28,k:4.5},ex:{ct:'Дефект перфузии'},drug:'anticoag',diff:4,ecg:'afib',inf:false,theory:'<b>Инфаркт почки</b> — тромбоз артерии.<br><b>Лечение:</b> антикоагулянты.'},
+  {id:'thyrotox',name:'Тиреотоксический криз',organ:'thyroid',vit:{bp:'150/80',hr:140,t:41.0,sp:95},blood:{hb:120,wbc:9000,plt:240,glu:6.5,trop:'-',crp:10,esr:20,creat:75,alt:45,k:3.5},ex:{blood:'Т4 ++'},drug:'beta',diff:5,ecg:'sinus_tachy',inf:false,theory:'<b>Тиреотоксический криз</b> — осложнение гипертиреоза.<br><b>Лечение:</b> бета-блокаторы.'},
+  {id:'bowelobs',name:'Кишечная непроходимость',organ:'bowel',vit:{bp:'110/70',hr:105,t:37.8,sp:97},blood:{hb:145,wbc:13000,plt:260,glu:5.0,trop:'-',crp:40,esr:25,creat:95,alt:28,k:3.2},ex:{xray:'Чаши Клойбера'},drug:'surgery',diff:3,ecg:'normal',inf:false,theory:'<b>Кишечная непроходимость</b> — нарушение пассажа.<br><b>Лечение:</b> хирургическое.'},
+  {id:'meningoc',name:'Менингококцемия',organ:'skin',vit:{bp:'70/40',hr:130,t:39.5,sp:88},blood:{hb:110,wbc:25000,plt:60,glu:3.5,trop:'-',crp:150,esr:60,creat:140,alt:50,k:4.5},ex:{blood:'Посев +'},drug:'antibio',diff:5,ecg:'sinus_tachy',inf:true,theory:'<b>Менингококцемия</b> — генерализованная инфекция.<br><b>Лечение:</b> цефтриаксон.'},
+  {id:'pericard',name:'Перикардит',organ:'heart',vit:{bp:'100/70',hr:105,t:37.9,sp:95},blood:{hb:130,wbc:12000,plt:240,glu:5.5,trop:'-',crp:60,esr:30,creat:80,alt:25,k:4.0},ex:{ausc:'Шум трения перикарда',ecg:'Подъём ST везде'},drug:'pain',diff:2,ecg:'stemi',inf:false,theory:'<b>Перикардит</b> — воспаление околосердечной сумки.<br><b>Симптомы:</b> боль в груди, усиливающаяся при вдохе.<br><b>Диагностика:</b> ЭКГ, шум трения.<br><b>Лечение:</b> НПВС, анальгетики.'},
+  {id:'endocard',name:'Эндокардит',organ:'heart',vit:{bp:'90/60',hr:115,t:39.5,sp:92},blood:{hb:105,wbc:18000,plt:180,glu:5.0,trop:'-',crp:120,esr:70,creat:100,alt:35,k:4.3},ex:{ausc:'Шум на митральном',ecg:'Блокада'},drug:'antibio',diff:4,ecg:'av_block',inf:true,theory:'<b>Эндокардит</b> — воспаление внутренней оболочки сердца.<br><b>Симптомы:</b> лихорадка, озноб, шум в сердце.<br><b>Лечение:</b> антибиотики 4-6 нед.'},
+  {id:'pleurisy',name:'Плеврит',organ:'lungs',vit:{bp:'115/75',hr:95,t:38.0,sp:94},blood:{hb:130,wbc:11000,plt:250,glu:5.2,trop:'-',crp:40,esr:30,creat:75,alt:22,k:4.0},ex:{ausc:'Шум трения плевры',xray:'Выпот'},drug:'antibio',diff:2,ecg:'normal',inf:true,theory:'<b>Плеврит</b> — воспаление плевры.<br><b>Симптомы:</b> боль в груди при дыхании.<br><b>Лечение:</b> антибиотики, НПВС.'},
+  {id:'pneumofib',name:'Пневмофиброз',organ:'lungs',vit:{bp:'105/70',hr:90,t:37.0,sp:88},blood:{hb:140,wbc:7000,plt:220,glu:5.0,trop:'-',crp:10,esr:20,creat:75,alt:22,k:4.0},ex:{xray:'Сетчатый рисунок',ausc:'Крепитация'},drug:'cortico',diff:3,ecg:'normal',inf:false,theory:'<b>Пневмофиброз</b> — разрастание соединительной ткани.<br><b>Симптомы:</b> одышка, сухой кашель.<br><b>Лечение:</b> кортикостероиды.'},
+  {id:'concuss',name:'Сотрясение мозга',organ:'brain',vit:{bp:'130/85',hr:70,t:36.6,sp:98},blood:{hb:135,wbc:7000,plt:230,glu:5.0,trop:'-',crp:3,esr:8,creat:75,alt:22,k:4.0},ex:{ct:'Нет очагов'},drug:'pain',diff:1,ecg:'normal',inf:false,theory:'<b>Сотрясение мозга</b> — лёгкая ЧМТ.<br><b>Симптомы:</b> головная боль, тошнота.<br><b>Лечение:</b> покой, анальгетики.'},
+  {id:'encephal',name:'Энцефалит',organ:'brain',vit:{bp:'140/90',hr:110,t:40.2,sp:94},blood:{hb:125,wbc:16000,plt:200,glu:3.8,trop:'-',crp:80,esr:50,creat:80,alt:40,k:4.0},ex:{ct:'Отёк мозга'},drug:'antiviral',diff:5,ecg:'sinus_tachy',inf:true,theory:'<b>Энцефалит</b> — воспаление вещества мозга.<br><b>Симптомы:</b> лихорадка, судороги, спутанность.<br><b>Лечение:</b> ацикловир.'},
+  {id:'osteopor',name:'Остеопороз',organ:'bone',vit:{bp:'130/80',hr:75,t:36.6,sp:98},blood:{hb:120,wbc:6500,plt:220,glu:5.0,trop:'-',crp:3,esr:12,creat:75,alt:22,k:4.0},ex:{xray:'Снижение плотности'},drug:'calcium',diff:2,ecg:'normal',inf:false,theory:'<b>Остеопороз</b> — снижение плотности костей.<br><b>Симптомы:</b> боли в спине, переломы.<br><b>Лечение:</b> кальций, витамин D.'},
+  {id:'arthrit',name:'Артрит',organ:'bone',vit:{bp:'125/80',hr:82,t:37.4,sp:97},blood:{hb:130,wbc:9000,plt:260,glu:5.3,trop:'-',crp:35,esr:40,creat:80,alt:22,k:4.1},ex:{xray:'Сужение суставной щели'},drug:'pain',diff:2,ecg:'normal',inf:false,theory:'<b>Артрит</b> — воспаление суставов.<br><b>Симптомы:</b> боль, отёк, скованность.<br><b>Лечение:</b> НПВС, физиотерапия.'},
+  {id:'glomer',name:'Гломерулонефрит',organ:'kidney',vit:{bp:'160/100',hr:85,t:37.5,sp:96},blood:{hb:110,wbc:9500,plt:240,glu:5.0,trop:'-',crp:30,esr:45,creat:200,alt:28,k:5.2},ex:{us:'Увеличение почек',blood:'Протеинурия'},drug:'cortico',diff:3,ecg:'lvh',inf:false,theory:'<b>Гломерулонефрит</b> — воспаление клубочков почек.<br><b>Симптомы:</b> отёки, высокое АД.<br><b>Лечение:</b> кортикостероиды.'},
+  {id:'cystitis',name:'Цистит',organ:'kidney',vit:{bp:'120/80',hr:85,t:37.3,sp:98},blood:{hb:130,wbc:10000,plt:240,glu:5.0,trop:'-',crp:20,esr:15,creat:70,alt:22,k:4.0},ex:{us:'Утолщение стенки'},drug:'antibio',diff:1,ecg:'normal',inf:true,theory:'<b>Цистит</b> — воспаление мочевого пузыря.<br><b>Симптомы:</b> частое болезненное мочеиспускание.<br><b>Лечение:</b> антибиотики.'},
+  {id:'cirrh_alc',name:'Алкогольный цирроз',organ:'liver',vit:{bp:'90/60',hr:90,t:37.2,sp:95},blood:{hb:85,wbc:3500,plt:70,glu:4.0,trop:'-',crp:20,esr:35,creat:110,alt:200,k:3.5},ex:{us:'Асцит, бугристая печень'},drug:'ivfluid',diff:4,ecg:'normal',inf:false,theory:'<b>Алкогольный цирроз</b> — терминальная стадия АБП.<br><b>Симптомы:</b> желтуха, асцит, энцефалопатия.<br><b>Лечение:</b> симптоматическое.'},
+  {id:'hepat_a',name:'Гепатит A',organ:'liver',vit:{bp:'110/70',hr:82,t:38.0,sp:97},blood:{hb:125,wbc:5500,plt:200,glu:4.8,trop:'-',crp:20,esr:25,creat:75,alt:600,k:4.0},ex:{us:'Увеличение печени',blood:'Anti-HAV IgM+'},drug:'ivfluid',diff:2,ecg:'normal',inf:true,theory:'<b>Гепатит A</b> — вирусный гепатит, путь фекально-оральный.<br><b>Симптомы:</b> желтуха, слабость.<br><b>Лечение:</b> поддерживающее.'},
+  {id:'gastr_ulc',name:'Язва желудка',organ:'stomach',vit:{bp:'110/70',hr:80,t:36.8,sp:97},blood:{hb:100,wbc:7500,plt:230,glu:5.0,trop:'-',crp:10,esr:15,creat:75,alt:22,k:3.8},ex:{us:'Язвенный дефект'},drug:'antacid',diff:2,ecg:'normal',inf:false,theory:'<b>Язва желудка</b> — дефект слизистой.<br><b>Симптомы:</b> боль в эпигастрии, изжога.<br><b>Лечение:</b> ИПП, антациды.'},
+  {id:'colitis',name:'Колит',organ:'bowel',vit:{bp:'115/75',hr:88,t:37.8,sp:97},blood:{hb:120,wbc:11000,plt:240,glu:5.0,trop:'-',crp:30,esr:25,creat:75,alt:22,k:3.7},ex:{us:'Утолщение стенки'},drug:'antibio',diff:2,ecg:'normal',inf:true,theory:'<b>Колит</b> — воспаление толстой кишки.<br><b>Симптомы:</b> диарея, боль в животе.<br><b>Лечение:</b> антибиотики.'},
+  {id:'ibd',name:'Болезнь Крона',organ:'bowel',vit:{bp:'110/70',hr:90,t:37.6,sp:96},blood:{hb:105,wbc:9500,plt:280,glu:4.5,trop:'-',crp:50,esr:40,creat:75,alt:30,k:3.6},ex:{us:'Утолщение подвздошной'},drug:'cortico',diff:3,ecg:'normal',inf:false,theory:'<b>Болезнь Крона</b> — хроническое воспаление ЖКТ.<br><b>Симптомы:</b> диарея, боль, потеря веса.<br><b>Лечение:</b> кортикостероиды.'},
+  {id:'leukemia',name:'Лейкемия',organ:'blood',vit:{bp:'100/65',hr:100,t:38.5,sp:94},blood:{hb:70,wbc:50000,plt:40,glu:4.5,trop:'-',crp:40,esr:80,creat:80,alt:35,k:4.5},ex:{blood:'Бластные клетки ++'},drug:'chemo',diff:5,ecg:'sinus_tachy',inf:false,theory:'<b>Лейкемия</b> — злокачественное заболевание крови.<br><b>Симптомы:</b> слабость, лихорадка, кровотечения.<br><b>Лечение:</b> химиотерапия.'},
+  {id:'hemophil',name:'Гемофилия',organ:'blood',vit:{bp:'110/70',hr:85,t:36.6,sp:97},blood:{hb:115,wbc:6000,plt:200,glu:5.0,trop:'-',crp:3,esr:10,creat:75,alt:22,k:4.0},ex:{blood:'АЧТВ удлинено'},drug:'coag',diff:4,ecg:'normal',inf:false,theory:'<b>Гемофилия</b> — наследственное нарушение свёртывания.<br><b>Симптомы:</b> длительные кровотечения.<br><b>Лечение:</b> факторы свёртывания.'},
+  {id:'psoriaz',name:'Псориаз',organ:'skin',vit:{bp:'120/80',hr:75,t:36.6,sp:98},blood:{hb:135,wbc:7500,plt:240,glu:5.2,trop:'-',crp:5,esr:12,creat:75,alt:22,k:4.1},ex:{ausc:'Псориатические бляшки'},drug:'cortico',diff:1,ecg:'normal',inf:false,theory:'<b>Псориаз</b> — хроническое заболевание кожи.<br><b>Симптомы:</b> красные бляшки, зуд.<br><b>Лечение:</b> топические стероиды.'},
+  {id:'hyperthyr',name:'Гипертиреоз',organ:'thyroid',vit:{bp:'140/80',hr:120,t:37.5,sp:97},blood:{hb:125,wbc:8000,plt:230,glu:6.0,trop:'-',crp:5,esr:15,creat:70,alt:35,k:3.6},ex:{blood:'ТТГ снижен, Т4 повышен'},drug:'beta',diff:3,ecg:'sinus_tachy',inf:false,theory:'<b>Гипертиреоз</b> — избыток гормонов щитовидной.<br><b>Симптомы:</b> сердцебиение, потливость, потеря веса.<br><b>Лечение:</b> бета-блокаторы, тиреостатики.'},
+  {id:'diab2',name:'Диабет 2 типа',organ:'pancreas',vit:{bp:'140/90',hr:82,t:36.7,sp:97},blood:{hb:140,wbc:8500,plt:250,glu:12.0,trop:'-',crp:5,esr:12,creat:85,alt:30,k:4.2},ex:{blood:'Глюкоза 12, HbA1c 8.5%'},drug:'insulin',diff:2,ecg:'normal',inf:false,theory:'<b>Диабет 2 типа</b> — инсулинорезистентность.<br><b>Симптомы:</b> жажда, частое мочеиспускание.<br><b>Лечение:</b> метформин, инсулин.'},
+];
+const DRUGS=[
+  {id:'antibio',name:'Антибиотики',desc:'Цефтриаксон 2г',price:80,ic:'fa-capsules'},
+  {id:'anticoag',name:'Антикоагулянты',desc:'Гепарин',price:120,ic:'fa-pills'},
+  {id:'thrombo',name:'Тромболитики',desc:'Альтеплаза',price:500,ic:'fa-syringe'},
+  {id:'pain',name:'Анальгетики',desc:'Кеторол',price:40,ic:'fa-tablets'},
+  {id:'broncho',name:'Бронхолитики',desc:'Сальбутамол',price:60,ic:'fa-wind'},
+  {id:'insulin',name:'Инсулин',desc:'Короткого действия',price:50,ic:'fa-syringe'},
+  {id:'surgery',name:'Хирургия',desc:'Экстренная операция',price:400,ic:'fa-scalpel'},
+  {id:'ivfluid',name:'Инфузии',desc:'Физраствор',price:30,ic:'fa-prescription-bottle'},
+  {id:'nitrates',name:'Нитраты',desc:'Нитроглицерин',price:20,ic:'fa-tablets'},
+  {id:'antiarr',name:'Антиаритмики',desc:'Амиодарон',price:150,ic:'fa-pills'},
+  {id:'cortico',name:'Глюкокортикоиды',desc:'Преднизолон',price:100,ic:'fa-syringe'},
+  {id:'sedat',name:'Седативные',desc:'Диазепам',price:80,ic:'fa-prescription-bottle'},
+  {id:'antiht',name:'Антигипертензивные',desc:'Нифедипин',price:40,ic:'fa-pills'},
+  {id:'antacid',name:'Антациды',desc:'Омепразол',price:25,ic:'fa-tablets'},
+  {id:'thyroid',name:'Гормоны щитовидной',desc:'L-тироксин',price:30,ic:'fa-pills'},
+  {id:'colchicine',name:'Колхицин',desc:'Противоподагрическое',price:70,ic:'fa-pills'},
+  {id:'iron',name:'Препараты железа',desc:'Сорбифер',price:35,ic:'fa-pills'},
+  {id:'glucose',name:'Глюкоза 40%',desc:'В/в болюсно',price:15,ic:'fa-syringe'},
+  {id:'naloxone',name:'Налоксон',desc:'Антагонист опиоидов',price:200,ic:'fa-syringe'},
+  {id:'beta',name:'Бета-блокаторы',desc:'Пропранолол',price:50,ic:'fa-pills'},
+  {id:'antiviral',name:'Противовирусные',desc:'Ацикловир',price:90,ic:'fa-shield-virus'},
+  {id:'diuretic',name:'Диуретики',desc:'Фуросемид',price:25,ic:'fa-water'},
+  {id:'antifung',name:'Противогрибковые',desc:'Флуконазол',price:70,ic:'fa-leaf'},
+  {id:'calcium',name:'Препараты кальция',desc:'Кальций D3',price:20,ic:'fa-bone'},
+  {id:'immuno',name:'Иммуносупрессоры',desc:'Метотрексат',price:180,ic:'fa-shield'},
+  {id:'antipsych',name:'Нейролептики',desc:'Галоперидол',price:110,ic:'fa-brain'},
+  {id:'antiemetic',name:'Противорвотные',desc:'Метоклопрамид',price:35,ic:'fa-pills'},
+  {id:'coag',name:'Коагулянты',desc:'Викасол',price:55,ic:'fa-droplet'},
+  {id:'chemo',name:'Химиотерапия',desc:'Циклофосфамид',price:600,ic:'fa-radiation'},
+  {id:'antihist',name:'Антигистаминные',desc:'Лоратадин',price:30,ic:'fa-allergies'},
+];
+
+// Инициализация инвентаря и цен сразу
+DRUGS.forEach(d => {
+    if (!(d.id in G.inventory)) G.inventory[d.id] = 10;
+    G.prices[d.id] = d.price;
+});
+
+const ACH=[
+  {id:'first',n:'Первый пациент',d:'Вылечить 1',ic:'fa-user-md',c:()=>G.cur>=1},
+  {id:'h10',n:'Целитель',d:'Вылечить 10',ic:'fa-heart',c:()=>G.cur>=10},
+  {id:'h50',n:'Мастер',d:'Вылечить 50',ic:'fa-star',c:()=>G.cur>=50},
+  {id:'h100',n:'Легенда',d:'Вылечить 100',ic:'fa-crown',c:()=>G.cur>=100},
+  {id:'s5',n:'Хирург',d:'5 операций',ic:'fa-scalpel',c:()=>G.surgC>=5},
+  {id:'r5k',n:'Финансист',d:'$5000',ic:'fa-coins',c:()=>G.money>=5000},
+  {id:'epi',n:'Эпидемиолог',d:'Пережить эпидемию',ic:'fa-virus',c:()=>G.epiSurvived},
+  {id:'nd',n:'Без потерь',d:'20 без смертей',ic:'fa-shield-alt',c:()=>G.cur>=20&&G.dth===0},
+  {id:'l10',n:'Профессионал',d:'10 уровень',ic:'fa-award',c:()=>G.lvl>=10},
+  {id:'rep100',n:'Народный врач',d:'100 репутации',ic:'fa-thumbs-up',c:()=>G.rep>=100},
+  {id:'builder',n:'Строитель',d:'3 корпуса',ic:'fa-hospital',c:()=>Object.values(G.campus).filter(v=>v).length>=3},
+  {id:'residency',n:'Ординатор',d:'Пройти ординатуру',ic:'fa-user-md',c:()=>G.residencyLevel>=3},
+  {id:'scholar',n:'Учёный',d:'10 теорий',ic:'fa-book',c:()=>Object.keys(G.residencyTheory).length>=10}
+];
+const STAFF_TYPES=[{id:'nurses',n:'Медсестра',d:'Авто-измерение',cost:500,ic:'fa-user-nurse'},{id:'orderlies',n:'Санитар',d:'+20% скорость',cost:300,ic:'fa-person-carry-box'},{id:'residents',n:'Ординатор',d:'Авто-диагностика',cost:1000,ic:'fa-user-md'}];
+const EQUIP=[{id:'xray',n:'Рентген',cost:500,ic:'fa-x-ray'},{id:'us',n:'УЗИ',cost:800,ic:'fa-wave-square'},{id:'ct',n:'КТ',cost:2000,ic:'fa-brain'},{id:'ecg',n:'ЭКГ',cost:300,ic:'fa-heartbeat'},{id:'lab',n:'Лаборатория',cost:600,ic:'fa-flask'}];
+const CAMPUS_BUILDINGS=[{id:'icu',n:'Реанимация',cost:5000,ic:'fa-procedures',req:5},{id:'surgery',n:'Операционная',cost:8000,ic:'fa-scalpel',req:8},{id:'lab',n:'Лаборатория',cost:3000,ic:'fa-flask',req:3},{id:'imaging',n:'Диагностика',cost:6000,ic:'fa-x-ray',req:6},{id:'pharmacy',n:'Аптека',cost:4000,ic:'fa-pills',req:7},{id:'maternity',n:'Родильное',cost:7000,ic:'fa-baby',req:10},{id:'rehab',n:'Реабилитация',cost:5000,ic:'fa-wheelchair',req:12},{id:'research',n:'Исследовательский центр',cost:10000,ic:'fa-microscope',req:15}];
+const RESIDENCY_QUESTIONS=[
+  {q:'Подъём ST на ЭКГ — это?',a:['Инфаркт','Аритмия','Норма','Гипертрофия'],c:0},
+  {q:'Препарат при анафилаксии?',a:['Антибиотики','Адреналин','Инсулин','Аспирин'],c:1},
+  {q:'Норма Hb у мужчин?',a:['80-100','120-160','180-200','60-80'],c:1},
+  {q:'SpO2 — это?',a:['АД','Сатурация','Пульс','Температура'],c:1},
+  {q:'Орган при гепатите?',a:['Сердце','Лёгкие','Печень','Почки'],c:2},
+  {q:'Пульс 140 — что делать?',a:['Ничего','Адреналин','Исследовать причину','Выписать'],c:2},
+  {q:'Анализ на воспаление?',a:['Глюкоза','СРБ','Креатинин','Калий'],c:1},
+  {q:'ТЭЛА — это?',a:['Тромбоэмболия лёгочной артерии','Эндокринная лабильность','Энцефалопатия','Травма артерии'],c:0},
+  {q:'Препарат при гипогликемии?',a:['Инсулин','Глюкоза 40%','Адреналин','Налоксон'],c:1},
+  {q:'Симптом Кернига — при?',a:['Аппендиците','Менингите','Пневмонии','Инфаркте'],c:1}
+];
+const FACTS=['Сердце бьётся 100 000 раз в день','Мозг потребляет 20% кислорода','В теле 600 мышц','ДНК идентична на 99.9%','Печень регенерирует до 75%','Эритроциты живут 120 дней','ЭКГ изобрёл Эйнтховен в 1903','Желудок обновляет слизь каждые 3 дня'];
+let actx;
+// ============================================
+// ФОНОВАЯ МУЗЫКА
+// ============================================
+let musicPlaying = false;
+let musicNodes = [];
+
+function startBackgroundMusic() {
+    if (musicPlaying || !actx) return;
+    musicPlaying = true;
+    
+    const now = actx.currentTime;
+    const duration = 4; // Длительность одной ноты в секундах
+    
+    // Создаём тихий фоновый тон (атмосферный дрон)
+    function createDrone(freq, startTime) {
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        const filter = actx.createBiquadFilter();
+        
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        
+        filter.type = 'lowpass';
+        filter.frequency.value = 800;
+        
+        gain.gain.setValueAtTime(0, startTime);
+        gain.gain.linearRampToValueAtTime(0.35, startTime + 2);
+        gain.gain.linearRampToValueAtTime(0, startTime + duration);
+        
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(actx.destination);
+        
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+        
+        musicNodes.push(osc);
+        
+        // Запускаем следующую ноту
+        setTimeout(() => {
+            if (musicPlaying) {
+                const nextFreq = freq * (Math.random() > 0.5 ? 1.5 : 0.667);
+                createDrone(nextFreq, actx.currentTime);
+            }
+        }, duration * 1000);
+    }
+    
+    // Запускаем несколько дронов с разными частотами
+    createDrone(110, now); // Ля
+    setTimeout(() => createDrone(164.81, actx.currentTime), 1000); // Ми
+    setTimeout(() => createDrone(220, actx.currentTime), 2000); // Ля
+}
+
+function stopBackgroundMusic() {
+    musicPlaying = false;
+    musicNodes.forEach(node => {
+        try { node.stop(); } catch(e) {}
+    });
+    musicNodes = [];
+}
+function toggleMusic() {
+    initA(); // Инициализируем аудио контекст
+    const icon = document.getElementById('musicIcon');
+    const status = document.getElementById('musicStatus');
+    const btn = document.getElementById('btnMusic');
+    
+    if (musicPlaying) {
+        stopBackgroundMusic();
+        icon.className = 'fas fa-music';
+        status.textContent = 'Выкл';
+        btn.style.background = '#1e293b';
+    } else {
+        startBackgroundMusic();
+        icon.className = 'fas fa-volume-up';
+        status.textContent = 'Вкл';
+        btn.style.background = '#059669';
+    }
+}
+function initA(){try{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}
+function beep(f=440,d=.15,tp='sine',v=.1){try{if(!actx)return;const o=actx.createOscillator(),g=actx.createGain();o.type=tp;o.frequency.value=f;g.gain.setValueAtTime(v,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+d);o.connect(g);g.connect(actx.destination);o.start();o.stop(actx.currentTime+d)}catch(e){}}
+function vibrate(pattern) {
+    if (navigator.vibrate) {
+        navigator.vibrate(pattern);
+    }
+}
+const S={
+    suc:()=>{
+        beep(660,.1);
+        setTimeout(()=>beep(880,.15),100);
+        vibrate([100, 50, 100]);
+    },
+    fail:()=>{
+        beep(200,.2,'sawtooth');
+        setTimeout(()=>beep(150,.25,'sawtooth'),150);
+        vibrate([300, 100, 300]);
+    },
+    clk:()=>{
+        beep(800,.05,'square',.05);
+        vibrate(50);
+    },
+    hb:()=>{
+        beep(80,.08,'sine',.15);
+        setTimeout(()=>beep(60,.08,'sine',.1),120);
+    },
+    mon:()=>beep(1200,.04,'square',.06),
+    cpr:()=>{
+        beep(100,.1,'sine',.2);
+        vibrate(80);
+    },
+    int:()=>{
+        beep(400,.15,'sine',.08);
+        setTimeout(()=>beep(500,.15,'sine',.08),100);
+    }
+};
+const ECG={normal:{n:'SINUS RHYTHM',c:'#10b981',lc:'',p:60},stemi:{n:'⚠ STEMI',c:'#dc2626',lc:'dng',p:60},ischemia:{n:'⚠ ISCHEMIA',c:'#f59e0b',lc:'wrn',p:60},afib:{n:'⚡ A-FIB',c:'#f59e0b',lc:'wrn',p:50,irr:true},sinus_tachy:{n:'SINUS TACHY',c:'#f59e0b',lc:'wrn',p:35},sinus_brady:{n:'SINUS BRADY',c:'#10b981',lc:'',p:90},vtach:{n:'💔 V-TACH',c:'#dc2626',lc:'dng',p:25},asystole:{n:'⚫ ASYSTOLE',c:'#64748b',lc:'dng',p:60},av_block:{n:'AV BLOCK',c:'#f59e0b',lc:'wrn',p:80},lvh:{n:'LVH',c:'#f59e0b',lc:'wrn',p:60}};
+function ecgY(pat,ph,y){switch(pat){case 'normal':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*4;if(ph<.15)return y;if(ph<.18)return y+(ph-.15)/.03*3;if(ph<.22)return y+3-(ph-.18)/.04*28;if(ph<.26)return y-25+(ph-.22)/.04*30;if(ph<.35)return y+2;if(ph<.48)return y+2-Math.sin((ph-.35)/.13*Math.PI)*8;return y;case 'stemi':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*4;if(ph<.15)return y;if(ph<.18)return y+(ph-.15)/.03*3;if(ph<.22)return y+3-(ph-.18)/.04*30;if(ph<.26)return y-27+(ph-.22)/.04*32;if(ph<.38)return y-12;if(ph<.52)return y-12-Math.sin((ph-.38)/.14*Math.PI)*14;return y;case 'ischemia':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*4;if(ph<.15)return y;if(ph<.18)return y+(ph-.15)/.03*2;if(ph<.22)return y+2-(ph-.18)/.04*22;if(ph<.26)return y-20+(ph-.22)/.04*22;if(ph<.35)return y+8;if(ph<.48)return y+8+Math.sin((ph-.35)/.13*Math.PI)*6;return y;case 'afib':const f=Math.sin(ph*50)*1.5;if(ph<.15)return y+f;if(ph<.18)return y+f+(ph-.15)/.03*2;if(ph<.22)return y+2+f-(ph-.18)/.04*24;if(ph<.26)return y-22+f+(ph-.22)/.04*24;if(ph<.35)return y+2+f;if(ph<.48)return y+2+f-Math.sin((ph-.35)/.13*Math.PI)*6;return y+f;case 'sinus_tachy':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*3;if(ph<.15)return y;if(ph<.18)return y+(ph-.15)/.03*2;if(ph<.22)return y+2-(ph-.18)/.04*22;if(ph<.26)return y-20+(ph-.22)/.04*22;if(ph<.35)return y+2;if(ph<.45)return y+2-Math.sin((ph-.35)/.1*Math.PI)*7;return y;case 'sinus_brady':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*4;if(ph<.18)return y;if(ph<.21)return y+(ph-.18)/.03*3;if(ph<.25)return y+3-(ph-.21)/.04*26;if(ph<.29)return y-23+(ph-.25)/.04*26;if(ph<.40)return y+2;if(ph<.55)return y+2-Math.sin((ph-.40)/.15*Math.PI)*8;return y;case 'vtach':if(ph<.1)return y+Math.sin(ph/.1*Math.PI)*3;if(ph<.25)return y+3-(ph-.1)/.15*35;if(ph<.45)return y-32+(ph-.25)/.2*40;if(ph<.6)return y+8-Math.sin((ph-.45)/.15*Math.PI)*10;return y;case 'asystole':return y+Math.sin(Date.now()*.01)*.5;case 'av_block':if(ph<.1)return y-Math.sin(ph/.1*Math.PI)*4;if(ph<.25)return y;if(ph<.28)return y+(ph-.25)/.03*3;if(ph<.32)return y+3-(ph-.28)/.04*26;if(ph<.36)return y-23+(ph-.32)/.04*26;if(ph<.45)return y+2;if(ph<.58)return y+2-Math.sin((ph-.45)/.13*Math.PI)*8;return y;case 'lvh':if(ph<.08)return y-Math.sin(ph/.08*Math.PI)*5;if(ph<.15)return y;if(ph<.18)return y+(ph-.15)/.03*4;if(ph<.22)return y+4-(ph-.18)/.04*38;if(ph<.26)return y-34+(ph-.22)/.04*38;if(ph<.35)return y+2;if(ph<.48)return y+2-Math.sin((ph-.35)/.13*Math.PI)*9;return y;default:return y;}}
+let fIdx=0;const fArr=[...FACTS].sort(()=>Math.random()-.5);
+document.getElementById('lFact').textContent=fArr[0];
+const fInt=setInterval(()=>{fIdx=(fIdx+1)%fArr.length;const f=document.getElementById('lFact');f.style.opacity=0;setTimeout(()=>{f.textContent=fArr[fIdx];f.style.opacity=.85},200)},2500);
+let lProg=0;const lInt=setInterval(()=>{lProg+=Math.random()*20+10;if(lProg>=100){lProg=100;clearInterval(lInt);enBtns()}document.getElementById('lFill').style.width=lProg+'%'},150);
+setTimeout(()=>{if(!G.started)enBtns()},3000);
+function enBtns(){
+    document.getElementById('bNew').disabled = false;
+    document.getElementById('bReset').disabled = false;
+    const has = localStorage.getItem(SK);
+    document.getElementById('bLoad').disabled = !has;
+    document.getElementById('lStat').textContent = has ? '✅ Найдено сохранение' : '✅ Готово';
+}
+function hideLoader(cb){const l=document.getElementById('loader'),g=document.getElementById('game');l.style.opacity='0';setTimeout(()=>{l.style.display='none';g.classList.add('vis');if(cb)setTimeout(cb,200)},600)}
+function startNew(){if(G.started)return;G.started=true;G.challenge=document.getElementById('chSel').value;localStorage.removeItem(SK);DRUGS.forEach(d=>{G.inventory[d.id]=10;G.prices[d.id]=d.price});hideLoader(startGame)}
+function startLoad(){if(G.started)return;const sv=localStorage.getItem(SK);if(!sv){toast('Нет сохранения','er');return}G.started=true;hideLoader(loadInt)}
+function forceReset(){if(!confirm('Удалить все сохранения?'))return;localStorage.removeItem(SK);location.reload()}
+function startGame(){try{G.running=true;newPatient();startTimers();startECG();renderAll();setInterval(randEv,45000);setInterval(autoSv,30000);setInterval(()=>{if(G.running)G.stats.playT++},1000);setInterval(updatePrices,60000);setInterval(degradeEquip,120000);if(G.challenge==='training')toast('🎓 Обучение: без штрафов','sc');if(G.challenge==='residency')toast('👨‍⚕️ Ординатура','sc');console.log('✅ Игра запущена:',G.challenge)}catch(e){console.error('Ошибка:',e);toast('Ошибка: '+e.message,'er')}}
+function startTimers(){setInterval(()=>{if(!G.running)return;const spd=G.challenge==='tsunami'?2:1;G.tmr-=spd;if(G.money<0)G.money=0;if(G.rep<0)G.rep=0;if(G.rep<50&&Math.random()<0.1){G.rep=Math.min(100,G.rep+1)}if(G.trust>0)G.trust-=.2*spd;if(G.challenge!=='training'&&Math.random()<0.05){G.money+=G.lvl*2}if(G.challenge!=='training'&&G.rep>=80&&Math.random()<0.02){G.money+=50;toast('🌟 VIP-пожертвование +$50','sc')}if(!G.patient&&G.admitOpen){newPatient()}if(!G.admitOpen&&!G.patient){G.tmr=G.maxT;document.getElementById('tmr').textContent=Math.round(G.tmr);renderPat();return}if(G.tmr<=0){if(G.patient){var choice=confirm('⏰ Время вышло!\n\nНажмите ОК — купить +30 сек за $100\nНажмите Отмена — отпустить пациента (-10 репутации)');if(choice){if(G.money>=100||G.challenge==='training'){if(G.challenge!=='training')G.money-=100;G.tmr=30;toast('⏰ +30 секунд (-$100)','sc');S.suc();addLog('⏰ Время продлено')}else{G.money-=100;G.tmr=30;toast('⏰ +30 секунд (в долг)','wr');S.fail();addLog('⏰ Время продлено (долг)')}}else{G.rep=Math.max(0,G.rep-10);G.patient=null;G.tmr=G.maxT;toast('🚶 Пациент отпущен (-10 репутации)','wr');S.fail();addLog('🚶 Пациент отпущен');updUI();newPatient()}}else{G.tmr=G.maxT;newPatient()}}if(G.trust<=0&&G.patient&&G.challenge!=='training'){toast('😡 Пациент ушёл!','er');G.dth++;G.patient=null;G.rep=Math.max(0,G.rep-10);newPatient()}if(G.returnPatients&&G.returnPatients.length>0){for(var ri=G.returnPatients.length-1;ri>=0;ri--){G.returnPatients[ri].returnTime--;if(G.returnPatients[ri].returnTime<=0){var rp=G.returnPatients[ri];G.returnPatients.splice(ri,1);if(!G.patient){G.patient=rp;G.patient.aiComplaint='"Доктор, я уже был у вас! Лечение '+G.patient.lastDrugName+' не помогло. Мне всё ещё плохо..."';G.trust=Math.max(0,G.trust-20);toast('🔄 Пациент вернулся! Лечение не помогло','wr');S.fail();addLog('🔄 Возврат пациента');renderPat();renderTrust()}else{G.returnPatients.push(rp);rp.returnTime=2}}}}document.getElementById('tmr').textContent=Math.max(0,Math.round(G.tmr));if(G.patient)driftVit();renderTrust()},1000)}
+function updatePrices(){if(typeof DRUGS === 'undefined') return; DRUGS.forEach(d=>{const base=d.price;const fluct=1+(Math.random()-.5)*.3;const mult=G.challenge==='broke'?3:1;G.prices[d.id]=Math.round(base*fluct*mult)})}
+function degradeEquip(){Object.keys(G.equipment).forEach(k=>{G.equipment[k]=Math.max(0,G.equipment[k]-Math.floor(Math.random()*5+2))})}
+function driftVit(){if(!G.patient)return;const p=G.patient;p.vit.hr+=(Math.random()-.5)*2;if(p.vit.hr<40)p.vit.hr=40;if(p.vit.hr>160)p.vit.hr=160;renderVit();updateStress()}
+function updateStress(){
+    const s=document.getElementById('stress');
+    if(G.patient&&G.patient.crit){
+        s.classList.add('on');
+        // Лёгкая тряска при критическом состоянии
+        if(!s._shaking) {
+            s._shaking = true;
+            shakeScreen('normal');
+            setTimeout(() => { s._shaking = false; }, 1000);
+        }
+    } else {
+        s.classList.remove('on');
+    }
+}
+function generatePatient(){
+    const organs=Object.keys(ORGANS);
+    const organ=organs[Math.floor(Math.random()*organs.length)];
+    const symps=SYMPTOMS[organ];
+    const selectedSymps=symps.sort(()=>Math.random()-.5).slice(0,2+Math.floor(Math.random()*2));
+    const age=25+Math.floor(Math.random()*55);
+    const male=Math.random()>.5;
+    const names=male?['Иванов','Петров','Сидоров','Козлов','Новиков']:['Иванова','Петрова','Сидорова','Козлова','Новикова'];
+    const patrs=male?['И.И.','П.С.','А.В.']:['М.А.','Е.Н.','О.В.'];
+    const name=names[Math.floor(Math.random()*names.length)]+' '+patrs[Math.floor(Math.random()*patrs.length)];
+    const complaint='"'+selectedSymps.join(', ')+(Math.random()>.5?', доктор':'')+'..."';
+    const matching=DISEASES.filter(d=>d.organ===organ);
+    const disease=matching[Math.floor(Math.random()*matching.length)];
+    const dialogAnswers=generateDialogAnswers(disease,age,male);
+    return{name,age,male,complaint,disease,organ,dialogAnswers};
+}
+function generateDialogAnswers(dis,age,male){
+    var acute=['mi','stroke','anaph','pneumot','ulcer','hycrisis','thyrotox','opioid','meningoc'];
+    var subacute=['appen','pe','sepsis','dka','epilep','mening','renal','burns','chole','bowelobs'];
+    var chronic=['tb','asthma','bronch','hepat','cirrh','hypo','anemia','gastr','lyme','angina'];
+    var duration;
+    if(acute.indexOf(dis.id)!==-1){
+        duration=['Внезапно, час назад','Только что началось','Минут 40, резко','Пару часов как'][Math.floor(Math.random()*4)];
+    }else if(subacute.indexOf(dis.id)!==-1){
+        duration=['Со вчерашнего дня','Второй день мучаюсь','Часов 6-8 уже','С утра началось'][Math.floor(Math.random()*4)];
+    }else{
+        duration=['Уже неделю','Давно это у меня','Месяц, наверное','Недели две'][Math.floor(Math.random()*4)];
+    }
+    var chronicMap={
+        'mi':'Давление высокое, лет пять',
+        'stroke':'Гипертония давно',
+        'dka':'Диабет с детства',
+        'asthma':'Астма с 12 лет',
+        'angina':'Сердце пошаливает последний год',
+        'afib':'Аритмия бывает',
+        'hypo':'Щитовидная, говорили',
+        'cirrh':'С печенью проблемы',
+        'anemia':'Малокровие находили',
+        'hepat':'Гепатит был давно',
+        'gout':'Подагра мучает',
+        'epilep':'Эпилепсия с юности',
+        'tb':'Лёгкие слабые с детства'
+    };
+    var chron=chronicMap[dis.id]||(Math.random()>0.7?['Гипертония','Диабет','Ничего особенного'][Math.floor(Math.random()*3)]:'Нет, ничего такого');
+    var medsMap={
+        'mi':'От давления таблетки пью',
+        'stroke':'Каптоприл принимаю',
+        'asthma':'Ингалятор с собой',
+        'dka':'Инсулин колю',
+        'angina':'Нитроглицерин иногда',
+        'hypo':'Гормоны щитовидной',
+        'afib':'От аритмии что-то',
+        'hycrisis':'От давления, но не помню название',
+        'gout':'От подагры аллопуринол',
+        'epilep':'Противосудорожные'
+    };
+    var meds=medsMap[dis.id]||(Math.random()>0.5?['Обезболивающее пил','Ничего','Витамины только','Сироп от кашля'][Math.floor(Math.random()*4)]:'Ничего не принимаю');
+    var recurrent=['asthma','angina','afib','epilep','gout','migr','hypogly','renal'];
+    var history;
+    if(recurrent.indexOf(dis.id)!==-1){
+        history=['Да, такое уже случалось','Было пару раз','Знакомое состояние','Повторяется периодически'][Math.floor(Math.random()*4)];
+    }else{
+        history=['Нет, впервые такое','Никогда раньше не было','Первый раз','Не припомню'][Math.floor(Math.random()*4)];
+    }
+    var severe=['Очень плохо, сил нет','Ужасно себя чувствую','Еле доехал','Хуже некуда'];
+    var moderate=['Так себе, работать не могу','Средненько, но держусь','Терпимо, но беспокоит','Не очень хорошо'];
+    var mild=['Да нормально вроде','Получше уже','Так, побаливает немного','Жить можно'];
+    var state;
+    if(dis.diff>=4)state=severe[Math.floor(Math.random()*4)];
+    else if(dis.diff>=2)state=moderate[Math.floor(Math.random()*4)];
+    else state=mild[Math.floor(Math.random()*4)];
+    return{duration:duration,chronic:chron,meds:meds,history:history,allergy:'Вроде нет',state:state};
+}
+// ============================================
+// ПЕРЕХОДЫ МЕЖДУ СЦЕНАМИ
+// ============================================
+function sceneTransition(callback, text = 'Загрузка...', duration = 800) {
+    const overlay = document.getElementById('sceneTransition');
+    const textEl = document.getElementById('transitionText');
+    
+    if (!overlay) return callback();
+    
+    textEl.textContent = text;
+    overlay.classList.add('active');
+    
+    setTimeout(() => {
+        if (typeof callback === 'function') callback();
+        
+        setTimeout(() => {
+            overlay.classList.remove('active');
+        }, 400);
+    }, duration);
+}
+function newPatient(){if(!G.admitOpen){
+    // Приём закрыт — пациенты не поступают, ждём
+    return;
+}G.pCnt++;let pool=DISEASES;if(G.rep>=90)pool=pool.filter(d=>d.diff>=3);if(G.challenge==='epidemic')pool=pool.filter(d=>d.inf);if(G.challenge==='disaster')pool=pool.filter(d=>d.diff>=3);const ai=generatePatient();const dis=ai.disease;const all=Math.random()>.7?['пенициллин','аспирин','йод'][Math.floor(Math.random()*3)]:null;G.patient={id:G.pCnt,name:ai.name,age:ai.age,male:ai.male,dis,all,vit:{...dis.vit},ex:{},diag:false,diagnosed:null,treated:false,crit:dis.diff>=3,log:[],arrT:Date.now(),aiComplaint:ai.complaint,dialogAnswers:ai.dialogAnswers};if(G.events.vip)G.patient.name='⭐ VIP: '+G.patient.name;G.trust=100;G.tmr=G.maxT;document.getElementById('pCard').classList.remove('crit');document.getElementById('av').classList.remove('crit');// Плавное появление карточки
+const pCard = document.getElementById('pCard');
+pCard.style.opacity = '0';
+pCard.style.transform = 'translateY(30px) scale(0.95)';
+pCard.style.transition = 'none';
+
+setTimeout(() => {
+    renderPat();
+    toast('📥 Поступил: '+G.patient.name,'');
+    addLog('📥 Пациент поступил');
+    updateStress();
+    
+    // Анимация появления
+    requestAnimationFrame(() => {
+        pCard.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        pCard.style.opacity = '1';
+        pCard.style.transform = 'translateY(0) scale(1)';
+    });
+}, 50);}
+function addLog(msg){if(!G.patient)return;G.patient.log.push({t:new Date().toLocaleTimeString(),m:msg});renderLog()}
+function renderLog(){const l=document.getElementById('pLog');l.innerHTML='<div style="font-weight:600;margin-bottom:3px"><i class="fas fa-history"></i> Журнал:</div>';if(!G.patient)return;G.patient.log.slice(-8).forEach(e=>{const d=document.createElement('div');d.textContent=e.t+' — '+e.m;l.appendChild(d)})}
+// Эффект печатной машинки
+function typeWriter(elementId, text, speed = 30) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.textContent = '';
+    let i = 0;
+    // Очищаем предыдущий таймер, если текст меняется быстро
+    if (el._twInterval) clearInterval(el._twInterval);
+    el._twInterval = setInterval(() => {
+        if (i < text.length) {
+            el.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(el._twInterval);
+        }
+    }, speed);
+}
+function renderPat(){const p=G.patient;if(!p){document.getElementById('pN').textContent=G.admitOpen?'Нет пациента':'🚫 Приём закрыт';return}document.getElementById('pN').textContent='Пациент №'+p.id+': '+p.name;document.getElementById('pM').textContent=(p.male?'Мужчина':'Женщина')+', '+p.age+' лет';typeWriter('cmpT', p.aiComplaint, 25);const organIcon=ORGANS[p.dis.organ]||'🫀';const organName=ORGAN_NAMES[p.dis.organ]||'Орган';document.getElementById('oFr').textContent=organIcon;if(G.challenge==='training'||G.challenge==='residency'){document.getElementById('oBk').textContent=p.dis.name}else{const diffText=p.dis.diff>=4?'ТЯЖЕЛОЕ':p.dis.diff>=2?'СРЕДНЕЕ':'ЛЕГКОЕ';document.getElementById('oBk').textContent=diffText}document.getElementById('oLf').textContent=organIcon;document.getElementById('oRt').textContent=organName;document.getElementById('oTp').textContent='🏥';document.getElementById('oBt').textContent='❤️';// Ускоряем орган при критическом состоянии
+const organ3d = document.getElementById('organ3d');
+if(p.crit){
+    organ3d.classList.add('critical');
+}else{
+    organ3d.classList.remove('critical');
+}const b=document.getElementById('tB');if(p.crit){b.className='tbadge t-red';b.textContent='Критический'}else if(p.dis.diff>=3){b.className='tbadge t-yel';b.textContent='Средней тяжести'}else{b.className='tbadge t-grn';b.textContent='Стабильный'}document.getElementById('al2').textContent=p.all?'⚠️ '+p.all:'не выявлены';document.getElementById('alD').textContent=p.all||'не выявлены';const typeNames={ausc:'Аускультация',xray:'Рентген',us:'УЗИ',ecg:'ЭКГ',blood:'Анализ крови',ct:'КТ/МРТ'};document.getElementById('tst').textContent=Object.keys(p.ex).length?Object.keys(p.ex).map(k=>typeNames[k]||k).join(', '):'не проведены';document.getElementById('dgD').textContent=p.diagnosed?p.diagnosed.name:'не установлен';renderVit();renderLog()}
+function renderVit(){const p=G.patient;if(!p){['bp','hr','tp','sp'].forEach(id=>document.getElementById(id).textContent='--');return}document.getElementById('bp').textContent=p.vit.bp;document.getElementById('hr').textContent=Math.round(p.vit.hr);document.getElementById('tp').textContent=p.vit.t.toFixed(1);document.getElementById('sp').textContent=Math.round(p.vit.sp);const vHR=document.getElementById('vHR');vHR.className='vit'+(p.vit.hr>110||p.vit.hr<60?' dng':p.vit.hr>100||p.vit.hr<70?' wrn':'');const vSp=document.getElementById('vS');vSp.className='vit'+(p.vit.sp<90?' dng':p.vit.sp<95?' wrn':'');const vT=document.getElementById('vT');vT.className='vit'+(p.vit.t>38.5?' wrn':'')}
+function renderTrust(){document.getElementById('trV').textContent=Math.round(G.trust)+'%';const f=document.getElementById('trF');f.style.width=G.trust+'%';f.style.background=G.trust>50?'var(--suc)':G.trust>20?'#f59e0b':'var(--acc)'}
+function openChat(){
+    if(!G.patient){toast('Нет пациента','wr');return}
+    document.getElementById('m-chat').classList.add('on');
+    renderChat();
+}
+function toggleAdmit(){
+    G.admitOpen = !G.admitOpen;
+    var btn = document.getElementById('btnAdmit');
+    if(G.admitOpen){
+        btn.innerHTML = '<i class="fas fa-door-open"></i>ПРИЁМ<br><small>Открыт</small>';
+        btn.classList.add('sc');
+        toast('🚪 Приём открыт — пациенты поступают', 'sc');
+        S.suc();
+    } else {
+        btn.innerHTML = '<i class="fas fa-door-closed"></i>ПРИЁМ<br><small>Закрыт</small>';
+        btn.classList.remove('sc');
+        btn.style.background = '#64748b';
+        btn.style.color = 'white';
+        btn.style.borderColor = '#64748b';
+        toast('🚪 Приём закрыт — пациенты не поступают', 'wr');
+        S.fail();
+    }
+    if(!G.patient) renderPat();
+}
+function renderChat(){
+    const box=document.getElementById('chatBox');
+    const qDiv=document.getElementById('chatQ');
+    box.innerHTML='';
+    qDiv.innerHTML='';
+    addChatMsg('patient',G.patient.aiComplaint);
+    if(!G.patient.dialogAnswers){
+        addChatMsg('patient','...');
+        return;
+    }
+    var d=G.patient.dialogAnswers;
+    var questions=[
+        {q:'Как давно вас это беспокоит?',a:d.duration},
+        {q:'Есть ли у вас хронические заболевания?',a:d.chronic},
+        {q:'Принимаете какие-нибудь лекарства?',a:d.meds},
+        {q:'Случалось ли такое раньше?',a:d.history},
+        {q:'Есть ли у вас аллергия на что-нибудь?',a:d.allergy},
+        {q:'Как вы себя сейчас чувствуете?',a:d.state}
+    ];
+    questions.forEach(function(q){
+        var btn=document.createElement('div');
+        btn.className='chat-q';
+        btn.textContent=q.q;
+        btn.onclick=function(){
+            addChatMsg('doctor',q.q);
+            setTimeout(function(){
+                addChatMsg('patient','«'+q.a+'»');
+                G.trust=Math.min(100,G.trust+3);
+                renderTrust();
+            },500);
+        };
+        qDiv.appendChild(btn);
+    });
+}
+
+function addChatMsg(type,text){const box=document.getElementById('chatBox');const msg=document.createElement('div');msg.className='chat-msg '+type;msg.textContent=text;box.appendChild(msg);box.scrollTop=box.scrollHeight}
+// ============================================
+// СИСТЕМА ЗАГРУЗКИ ДЕЙСТВИЙ
+// ============================================
+// ============================================
+// ЗВУКИ МЕДИЦИНСКИХ АППАРАТОВ
+// ============================================
+function playExamSound(text) {
+    if (!actx) return;
+    const now = actx.currentTime;
+    const duration = 1.5; 
+
+    if (text.includes('рентген') || text.includes('кт')) {
+        // Рентген/КТ: Низкий гул и механический визг
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(60, now);
+        osc.frequency.linearRampToValueAtTime(120, now + duration);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.linearRampToValueAtTime(0, now + duration);
+        osc.connect(gain).connect(actx.destination);
+        osc.start(now); osc.stop(now + duration);
+    } else if (text.includes('анализ')) {
+        // Анализ крови: Быстрые щелчки (как центрифуга)
+        for(let i=0; i<12; i++) {
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.type = 'square';
+            osc.frequency.value = 600 + Math.random()*400;
+            gain.gain.setValueAtTime(0.04, now + i*0.1);
+            gain.gain.linearRampToValueAtTime(0, now + i*0.1 + 0.04);
+            osc.connect(gain).connect(actx.destination);
+            osc.start(now + i*0.1); osc.stop(now + i*0.1 + 0.04);
+        }
+    } else if (text.includes('экг')) {
+        // ЭКГ: Характерный писк монитора
+        for(let i=0; i<4; i++) {
+            const osc = actx.createOscillator();
+            const gain = actx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = 1200;
+            gain.gain.setValueAtTime(0.08, now + i*0.3);
+            gain.gain.linearRampToValueAtTime(0, now + i*0.3 + 0.08);
+            osc.connect(gain).connect(actx.destination);
+            osc.start(now + i*0.3); osc.stop(now + i*0.3 + 0.08);
+        }
+    } else if (text.includes('узи')) {
+        // УЗИ: Высокочастотное сканирование
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(2000, now);
+        osc.frequency.linearRampToValueAtTime(4000, now + duration);
+        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.linearRampToValueAtTime(0, now + duration);
+        osc.connect(gain).connect(actx.destination);
+        osc.start(now); osc.stop(now + duration);
+    } else {
+        // По умолчанию: Тихий гул оборудования
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = 150;
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.linearRampToValueAtTime(0, now + duration);
+        osc.connect(gain).connect(actx.destination);
+        osc.start(now); osc.stop(now + duration);
+    }
+}
+function processAction(callback, text = 'Обработка...', duration = 1200) {
+    // Создаем оверлей, если его нет
+    let overlay = document.getElementById('actionOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'actionOverlay';
+        overlay.style.cssText = `
+            position: fixed; 
+            inset: 0; 
+            background: rgba(15, 23, 42, 0.7); 
+            z-index: 9000; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            color: white; 
+            backdrop-filter: blur(4px); 
+            opacity: 0; 
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        `;
+        overlay.innerHTML = `
+            <div style="font-size: 3rem; margin-bottom: 20px;" class="a-pulse">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <div id="actionText" style="font-size: 1.3rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 20px;">${text}</div>
+            <div style="width: 250px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 3px; overflow: hidden;">
+                <div id="actionBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #059669); border-radius: 3px;"></div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    } else {
+        // Обновляем текст и сбрасываем прогресс-бар
+        document.getElementById('actionText').textContent = text;
+        const bar = document.getElementById('actionBar');
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+    }
+    
+    // Показываем оверлей с анимацией
+    playExamSound(text);
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+        requestAnimationFrame(() => {
+            const bar = document.getElementById('actionBar');
+            bar.style.transition = `width ${duration}ms linear`;
+            bar.style.width = '100%';
+        });
+    });
+
+    // Выполняем действие после задержки
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            if (typeof callback === 'function') callback();
+        }, 300);
+    }, duration);
+}
+function doExam(type,base){
+    if(!G.patient){toast('Нет пациента','wr');return}
+    const disc=(1-G.skills.therapy*.1)*(G.rep>=70?0.9:G.rep>=40?0.95:1);
+    const mult=G.challenge==='broke'?3:1;
+    const price=Math.floor(base*disc*mult);
+    const eqMap={xray:'xray',us:'us',ecg:'ecg',ct:'ct',blood:'lab'};
+    if(eqMap[type]&&G.equipment[eqMap[type]]<30){toast('⚠️ Оборудование неисправно!','er');S.fail();return}
+    if(G.money<price&&G.challenge!=='training'){
+        if(type==='ausc'){price=0;toast('🆓 Бесплатная аускультация','')}
+        else{toast('💸 Нет денег!','er');S.fail();return}
+    }
+    if(G.challenge!=='training')G.money-=price;
+    G.stats.totE++;
+    G.trust=Math.max(0,G.trust-5);
+    G.patient.ex[type]=true;
+    if(G.staff.orderlies>0)G.trust=Math.min(100,G.trust+2);
+    const dis=G.patient.dis;
+    const r=document.getElementById('exR');
+    const tNames={ausc:'Аускультация',xray:'Рентген',us:'УЗИ',ecg:'ЭКГ',blood:'Анализ крови',ct:'КТ/МРТ'};
+    
+    processAction(() => {
+        r.style.display='block';
+        if(type==='blood'){
+            const b=dis.blood;
+            r.innerHTML='<b>🩸 Анализ крови:</b><div class="bp">'+bloodRow('Гемоглобин',b.hb,'г/л',120,160)+bloodRow('Лейкоциты',b.wbc,'кл/мкл',4000,9000)+bloodRow('Тромбоциты',b.plt,'тыс/мкл',150,400)+bloodRow('Глюкоза',b.glu,'ммоль/л',3.3,5.5)+bloodRow('Тропонин',b.trop,'','-','-')+bloodRow('СРБ',b.crp,'мг/л',0,5)+bloodRow('СОЭ',b.esr,'мм/ч',2,15)+bloodRow('Креатинин',b.creat,'мкмоль/л',60,110)+bloodRow('АЛТ',b.alt,'Ед/л',10,40)+bloodRow('Калий',b.k,'ммоль/л',3.5,5.0)+'</div>'
+        }else if(type==='ecg'){
+            r.innerHTML='<b>📈 ЭКГ:</b> '+(dis.ex.ecg||'Норма')
+        }else{
+            const keyMap={ausc:'ausc',xray:'xray',us:'us',ct:'ct'};
+            r.innerHTML='<b>🔬 Результат:</b> '+(dis.ex[keyMap[type]]||'Норма')
+        }
+        S.mon();
+        toast('✅ '+tNames[type]+' (-$'+price+')','sc');
+        addLog('🔬 '+tNames[type]);
+        renderPat();
+        renderTrust();
+        updUI();
+    }, 'Проводится '+tNames[type].toLowerCase()+'...', 1500);
+}
+function bloodRow(n,v,u,min,max){let cls='';if(typeof v==='number'){if(typeof max==='number'&&v>max)cls='hi';else if(typeof min==='number'&&v<min)cls='lo'}else if(typeof v==='string'&&v!=='-'&&v!==min){if(v==='ВЫСОКИЙ'||v==='+'||v==='ВЫСОКАЯ')cls='hi';else if(v==='НИЗКИЙ')cls='lo'}return`<div class="bi ${cls}"><div class="bi-n">${n}</div><div class="bi-v">${v} <small style="color:var(--sec)">${u}</small></div></div>`}
+function rDiag(){const l=document.getElementById('dL');l.innerHTML='';DISEASES.forEach(d=>{const el=document.createElement('div');el.className='dopt';el.innerHTML=`<div><div class="dn">${d.name}</div><div class="dd">★${d.diff} • ${ORGANS[d.organ]||'?'}</div></div><i class="fas fa-chevron-right"></i>`;el.onclick=()=>selDiag(d,el);l.appendChild(el)})}
+function selDiag(d,el){if(!G.patient)return;const cor=G.patient.dis.id===d.id;el.classList.add(cor?'ok':'no');S.clk();G.stats.totD++;setTimeout(()=>{if(cor){G.stats.corD++;G.patient.diagnosed=d;G.patient.diag=true;const mult=G.challenge==='tsunami'?2:G.challenge==='broke'?3:1;const rw=30*d.diff*mult;G.xp+=rw;if(G.challenge!=='training'){G.money+=100*d.diff*mult;G.rep=Math.min(100,G.rep+5)}G.trust=Math.min(100,G.trust+15);toast('✅ Верно! +'+rw+' XP','sc');var recDrug=DRUGS.find(dr=>dr.id===d.drug);var altDrugs=DRUGS.filter(dr=>dr.id!==d.drug&&dr.id!=='surgery').sort(()=>Math.random()-.5).slice(0,2);var hints=[recDrug.name];altDrugs.forEach(dr=>hints.push(dr.name));hints.sort(()=>Math.random()-.5);if(recDrug)setTimeout(()=>toast('💡 Возможное лечение: '+hints.join(', '),''),2000);S.suc();addLog('✅ Диагноз: '+d.name);chkLvl();spawn(el)}else{if(G.challenge!=='training'){G.money-=100;G.rep=Math.max(0,G.rep-10);G.trust=Math.max(0,G.trust-15)}toast('❌ Ошибка!','er');S.fail();addLog('❌ Неверный диагноз')}cM('diag');renderPat();updUI();renderTrust()},500)}
+function rDrugs(){const l=document.getElementById('dRL');l.innerHTML='';G.selDrug=null;DRUGS.forEach(dr=>{const el=document.createElement('div');el.className='dr';const inc=(G.patient?.all==='пенициллин'&&dr.id==='antibio')||(G.patient?.all==='аспирин'&&dr.id==='anticoag');if(inc)el.classList.add('inc');const stock=G.inventory[dr.id]||0;const price=G.prices[dr.id]||dr.price;const effPrice=G.rep>=80?Math.floor(price*0.85):price;el.innerHTML=`<div class="drn"><i class="fas ${dr.ic}"></i> ${dr.name}</div><div class="drd">${dr.desc}</div><div style="display:flex;justify-content:space-between;margin-top:4px"><span style="color:var(--suc);font-weight:700">$${effPrice||price}</span><span style="color:${stock>5?'var(--pri)':'var(--acc)'};font-size:.7rem">📦${stock}</span></div>${inc?'<div style="color:var(--acc);font-size:.7rem;margin-top:2px"><i class="fas fa-exclamation-triangle"></i> Аллергия!</div>':''}`;el.onclick=()=>{document.querySelectorAll('#dRL .dr').forEach(d=>d.classList.remove('sel'));el.classList.add('sel');G.selDrug=dr;S.clk()};l.appendChild(el)})}
+function prescribe(){if(!G.patient){toast('Нет пациента','wr');return}if(!G.patient.diag&&!G.prescribeForWard){toast('⚠️ Сначала установите диагноз!','wr');S.fail();return}if(!G.selDrug){toast('Выберите препарат','wr');return}const dr=G.selDrug;const stock=G.inventory[dr.id]||0;const price=G.prices[dr.id]||dr.price;if(stock<=0&&dr.id!=='surgery'){if(G.money<=-500){toast('💸 Слишком большой долг!','er');S.fail();return}if(confirm('📦 Нет в наличии! Заказать экстренно за двойную цену?')){var emPrice=price*2;G.money-=emPrice;G.inventory[dr.id]=1;if(G.money<0){toast('📦 Экстренный заказ (в долг)','wr')}else{toast('📦 Экстренный заказ (-$'+emPrice+')','sc')}}else{toast('📦 Нет в наличии!','er');S.fail();return}}if(G.money<price&&G.challenge!=='training'){toast('💸 Нет денег','er');S.fail();return}if(G.patient.all==='пенициллин'&&dr.id==='antibio'){toast('💀 Анафилактический шок!','er');S.fail();G.patient.vit.hr=140;G.patient.vit.bp='70/40';G.patient.vit.sp=80;if(G.challenge!=='training'){G.dth++;G.rep=Math.max(0,G.rep-20)}addLog('💀 Анафилаксия!');updUI();renderVit();updateStress();shakeScreen('strong');return}if(G.patient.all==='аспирин'&&dr.id==='anticoag'){toast('⚠️ Аллергия!','er');S.fail();G.patient.vit.hr=130;G.patient.vit.sp=85;if(G.challenge!=='training')G.rep=Math.max(0,G.rep-15);addLog('⚠️ Аллергия');updUI();renderVit();return}var actualPrice=G.rep>=80?Math.floor(price*0.85):price;if(G.challenge!=='training'){G.money-=actualPrice;if(dr.id!=='surgery')G.inventory[dr.id]--}var isWardPatient=G.prescribeForWard&&G.selPatient;var cor;if(isWardPatient){cor=G.selPatient.patient.diag&&G.selPatient.patient.dis.drug===dr.id}else{cor=G.patient&&G.patient.diag&&G.patient.dis.drug===dr.id}if(cor){if(isWardPatient){G.ward[G.selPatient.wardIndex].treated=true;G.ward[G.selPatient.wardIndex].stay=Math.max(1,G.ward[G.selPatient.wardIndex].stay-1);G.money+=50;G.xp+=10;toast('💊 Лечение переназначено!','sc');S.suc();G.prescribeForWard=false;G.selPatient=null;cM('drugs');renderWard();return}var mult=G.challenge==='tsunami'?2:G.challenge==='broke'?3:1;var rw=50*G.patient.dis.diff*mult;if(G.challenge!=='training'){G.money+=rw+200;G.rep=Math.min(100,G.rep+10)}G.xp+=20*G.patient.dis.diff;G.cur++;G.patient.treated=true;G.patient.lastDrug=dr.id;G.patient.lastDrugName=dr.name;G.trust=100;var tt=(Date.now()-G.patient.arrT)/1000;G.stats.avgT=G.stats.avgT?(G.stats.avgT*(G.cur-1)+tt)/G.cur:tt;toast('💊 Вылечен! +$'+(rw+200),'sc');S.suc();addLog('💊 Лечение: '+dr.name);chkLvl()}else if(dr.id==='surgery'){toast('Сначала диагноз!','wr');if(G.challenge!=='training'){G.money+=price;if(G.inventory[dr.id]!==undefined)G.inventory[dr.id]++}}else{G.patient.treated=true;G.patient.lastDrug=dr.id;G.patient.lastDrugName=dr.name;if(G.challenge!=='training'){G.rep=Math.max(0,G.rep-3);G.trust=Math.max(0,G.trust-5)}toast('💊 Лечение назначено','sc');S.suc();addLog('💊 Назначено: '+dr.name)}processAction(() => {
+    cM('drugs');
+    updUI();
+    renderPat();
+    renderTrust();
+}, 'Назначение препаратов...', 1000);}
+function emerg(){if(!G.patient){toast('Нет пациента','wr');return}if(G.money<200&&G.challenge!=='training'){toast('💸 $200','er');S.fail();return}if(G.challenge!=='training')G.money-=200;if(G.patient.crit){G.patient.vit.hr=Math.max(60,G.patient.vit.hr-30);G.patient.vit.sp=Math.min(98,G.patient.vit.sp+8);document.getElementById('pCard').classList.remove('crit');document.getElementById('av').classList.remove('crit');toast('💉 Стабилизация','sc');S.suc();addLog('💉 Адреналин')}else{toast('Не был критичен','wr');addLog('💉 Адреналин (не критично)')}updUI();renderVit();updateStress()}
+function next(){if(!G.patient){toast('Нет пациента','wr');return}if(!G.patient.treated&&!G.patient.diag){if(confirm('⚠️ Пациент не осмотрен! Уйти без лечения?')){G.dth++;G.rep=Math.max(0,G.rep-15);toast('🚶 Пациент ушёл','wr');S.fail();addLog('🚶 Пропущен');sceneTransition(() => { G.patient = null; newPatient(); updUI(); }, 'Пациент ушёл...', 600);}else{return}}else if(G.patient.treated){sceneTransition(() => { G.patient = null; newPatient(); updUI(); }, 'Следующий пациент...', 600);}else{if(confirm('⚠️ Диагноз есть, но лечение не назначено. Пропустить?')){G.dth++;G.rep=Math.max(0,G.rep-20);toast('💀 Пациент умер без лечения','er');S.fail();addLog('💀 Умер без лечения');shakeScreen('strong');G.patient=null;newPatient();updUI()}}}
+function buyTime(){if(!G.running){toast('Игра не запущена','er');return}if(G.money<100&&G.challenge!=='training'){toast('💸 Нет денег','er');return}if(G.challenge!=='training')G.money-=100;G.tmr=Math.min(G.tmr+30,G.maxT);toast('⏰ +30 секунд','sc');S.suc()}
+function hosp(){if(!G.patient){toast('Нет пациента','wr');return}if(!G.patient.diag){toast('Сначала диагноз','wr');return}const fr=G.ward.indexOf(null);if(fr===-1){toast('🏥 Переполнен! Приём закрыт','er');S.fail();G.admitOpen=false;var btn=document.getElementById('btnAdmit');btn.innerHTML='<i class="fas fa-door-closed"></i>ПРИЁМ<br><small>Закрыт</small>';btn.classList.remove('sc');btn.style.background='#64748b';btn.style.color='white';btn.style.borderColor='#64748b';return}if(!G.patient.treated){if(confirm('⚠️ Лечение не назначено.\n\nПоложить в стационар без лечения?\nОК — госпитализировать\nОтмена — отменить')){G.patient.treated=false;toast('🏥 В стационар без лечения','wr');S.fail();addLog('🏥 Госпитализация без лечения')}else{return}}G.ward[fr]={...G.patient,stay:5+G.patient.dis.diff};var repBonus=3;if(G.patient.dis.diff<=2){repBonus=-3;toast('🏥 Госпитализирован (амбулаторный случай)','wr');S.fail()}else if(G.patient.dis.diff>=4){repBonus=8;toast('🏥 Госпитализирован ✅','sc');S.suc()}else{toast('🏥 Госпитализирован','sc');S.suc()}G.xp+=15;if(G.challenge!=='training')G.rep=Math.min(100,Math.max(0,G.rep+repBonus));addLog('🏥 Госпитализация');chkLvl();sceneTransition(() => { G.patient = null; updUI(); newPatient(); }, 'Госпитализация...', 600);}
+function disch(){if(!G.patient){toast('Нет пациента','wr');return}if(G.patient.treated){if(G.patient.dis.drug===G.patient.lastDrug){var bonus=150;var repBonus=5;if(G.patient.dis.diff>=4){bonus=50;repBonus=0;toast('🏠 Выписан +$50 (нужен был стационар)','wr');S.fail()}else{toast('🏠 Выписан +$'+bonus,'sc');S.suc()}if(G.challenge!=='training'){G.money+=bonus;G.rep=Math.min(100,G.rep+repBonus)}G.xp+=10;G.cur++;addLog('🏠 Выписка');chkLvl()}else{G.money+=50;G.xp+=5;toast('🏠 Выписан +$50 (возможен возврат)','wr');addLog('🏠 Выписка (риск возврата)');if(!G.returnPatients)G.returnPatients=[];G.returnPatients.push({...G.patient,returnTime:3+Math.floor(Math.random()*5)})}}else if(G.patient.diag&&!G.patient.treated){if(confirm('⚠️ Диагноз есть, но лечение не назначено.\n\nВыписать без лечения?\nОК — выписать (риск возврата)\nОтмена — остаться')){G.money+=30;G.xp+=5;toast('🏠 Выписан без лечения (+$30, риск возврата)','wr');S.fail();addLog('🏠 Выписка без лечения');if(!G.returnPatients)G.returnPatients=[];G.returnPatients.push({...G.patient,returnTime:2+Math.floor(Math.random()*3)})}else{return}}else{if(G.challenge!=='training'){if(G.money>=200){G.money-=200}else{G.rep=Math.max(0,G.rep-25)}G.dth++;G.rep=Math.max(0,G.rep-20)}toast('⚠️ Ранняя выписка!','er');S.fail();addLog('⚠️ Ранняя выписка')}sceneTransition(() => { G.patient = null; updUI(); newPatient(); }, 'Выписка пациента...', 600);}
+function consult(){if(!G.patient){toast('Нет пациента','wr');return}if(G.patient.diag){toast('⚠️ Диагноз уже установлен!','wr');return}if(G.money<400&&G.challenge!=='training'){toast('💸 $400','er');S.fail();return}if(G.challenge!=='training')G.money-=400;G.trust=Math.max(0,G.trust-10);const dis=G.patient.dis;const organHints={heart:'сердцем',lungs:'лёгкими',brain:'мозгом',bone:'костями',kidney:'почками',liver:'печенью',stomach:'ЖКТ',blood:'кровью',skin:'кожей',thyroid:'щитовидной',bowel:'кишечником',pancreas:'поджелудочной'};const hints=[];hints.push('Я думаю, проблема с '+organHints[dis.organ]);const wrong=DISEASES.filter(d=>d.id!==dis.id).sort(()=>Math.random()-.5).slice(0,3);hints.push('Точно НЕ '+wrong.map(d=>d.name).join(', '));processAction(() => {
+    toast('👨‍⚕️ Консилиум: '+hints[0],'sc');
+    setTimeout(()=>toast('👨‍⚕️ '+hints[1],''),1500);
+    addLog('👨‍⚕️ Консилиум');
+    updUI();
+    renderTrust();
+}, 'Консультация с коллегами...', 1800);}
+function togEpi(){G.epi=!G.epi;document.getElementById('epb').classList.toggle('on',G.epi);if(G.epi){G.epiQ=Array(6).fill(0).map(()=>DISEASES.filter(d=>d.inf)[Math.floor(Math.random()*DISEASES.filter(d=>d.inf).length)]);document.getElementById('epC').textContent=G.epiQ.length;toast('🦠 ЭПИДЕМИЯ!','wr');S.fail()}else{G.epiSurvived=true;toast('✅ Эпидемия остановлена','sc');S.suc();chkAch()}}
+function startSurg(){
+    if(!G.patient){toast('Нет пациента','wr');return}
+    if(!G.patient.diag){toast('Сначала диагноз','wr');return}
+    
+    processAction(() => {
+        const g=['cut','defib','suture','iv','cpr','intub'];
+        const gm=g[Math.floor(Math.random()*g.length)];
+        oM('mg');
+        if(gm==='cut')cutG();
+        else if(gm==='defib')defibG();
+        else if(gm==='suture')sutG();
+        else if(gm==='iv')ivG();
+        else if(gm==='cpr')cprG();
+        else if(gm==='intub')intG();
+    }, 'Подготовка к операции...', 2000);
+}
+
+function cutG(){document.getElementById('mgT').innerHTML='<i class="fas fa-scalpel"></i> Разрез';document.getElementById('mgH').textContent='Кликайте по жёлтым точкам!';const a=document.getElementById('mgA');a.innerHTML='<div id="cutL"><div class="cpath"></div></div>';const l=document.getElementById('cutL');const n=6+G.skills.surgery;let c=0;for(let i=0;i<n;i++){const p=document.createElement('div');p.className='cpt';p.style.left=(10+(80*i/(n-1)))+'%';p.style.top=(50+(Math.random()-.5)*10)+'%';p.onclick=()=>{if(!p.classList.contains('ok')){p.classList.add('ok');c++;S.clk();if(c>=n)finSurg(true)}};l.appendChild(p)}setTimeout(()=>{if(c<n){document.querySelectorAll('.cpt:not(.ok)').forEach(p=>p.classList.add('ms'));finSurg(false)}},6000)}
+function defibG(){document.getElementById('mgT').innerHTML='<i class="fas fa-bolt"></i> Дефибрилляция';document.getElementById('mgH').textContent='Нажмите ПРОБЕЛ когда линия в центре!';const a=document.getElementById('mgA');a.innerHTML='<div class="def-c"><div class="hrt-b"><i class="fas fa-heart"></i></div><div class="b-ind"><div class="b-tg"></div><div class="b-ln" id="bLn"></div></div><button class="btn sc" style="flex-direction:row;margin:0 auto;padding:14px 30px" onclick="defHit()"><i class="fas fa-bolt"></i> РАЗРЯД!</button></div>';window.defA=0;window.defS=0;window.defH=(e)=>{if(e.code==='Space'){e.preventDefault();defHit()}};document.addEventListener('keydown',window.defH);setTimeout(()=>{if(window.defA<3)finSurg(window.defS>=2)},8000)}
+function defHit(){window.defA++;const l=document.getElementById('bLn');if(!l)return;const r=l.getBoundingClientRect(),p=l.parentElement.getBoundingClientRect();const pos=(r.left-p.left+2)/p.width;if(Math.abs(pos-.5)<.15){window.defS++;toast('✅ Попадание!','sc');S.suc()}else{toast('Мимо!','er');S.fail()}if(window.defA>=3){document.removeEventListener('keydown',window.defH);setTimeout(()=>finSurg(window.defS>=2),500)}}
+function sutG(){document.getElementById('mgT').innerHTML='<i class="fas fa-band-aid"></i> Швы';document.getElementById('mgH').textContent='Кликайте по порядку 1,2,3...';const a=document.getElementById('mgA');a.innerHTML='<div id="sutL" style="height:220px"></div>';const l=document.getElementById('sutL');const n=5+G.skills.surgery;let nx=1;for(let i=1;i<=n;i++){const p=document.createElement('div');p.className='spt';p.style.left=(10+(80*(i-1)/(n-1)))+'%';p.style.top=(50+(i%2?-1:1)*20)+'%';p.textContent=i;p.onclick=()=>{if(i===nx){p.classList.add('ok');nx++;S.clk();if(nx>n)finSurg(true)}else{p.classList.add('ms');S.fail()}};l.appendChild(p)}setTimeout(()=>finSurg(nx>n),10000)}
+function ivG(){document.getElementById('mgT').innerHTML='<i class="fas fa-prescription-bottle"></i> Капельница';document.getElementById('mgH').textContent='Нажмите A→B→C→D';const a=document.getElementById('mgA');const ord=['A','B','C','D'].sort(()=>Math.random()-.5);a.innerHTML='<div style="padding:25px;text-align:center"><div style="font-size:2.5rem;margin-bottom:15px"><i class="fas fa-prescription-bottle" style="color:#10b981"></i></div><div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap" id="ivV"></div></div>';const v=document.getElementById('ivV');let s=0;const cor=['A','B','C','D'];ord.forEach(ltr=>{const b=document.createElement('button');b.className='btn sc';b.style.flexDirection='row';b.style.padding='15px 25px';b.style.fontSize='1.3rem';b.innerHTML='<i class="fas fa-faucet"></i> '+ltr;b.onclick=()=>{if(ltr===cor[s]){b.disabled=true;s++;S.clk();if(s>=4)finSurg(true)}else{b.classList.remove('sc');b.classList.add('em');S.fail();finSurg(false)}};v.appendChild(b)});setTimeout(()=>finSurg(s>=4),10000)}
+function cprG(){document.getElementById('mgT').innerHTML='<i class="fas fa-hand-holding-medical"></i> СЛР';document.getElementById('mgH').textContent='Нажимайте 100-120 уд/мин!';const a=document.getElementById('mgA');a.innerHTML='<div class="cpr-c"><div class="hrt-b"><i class="fas fa-heart"></i></div><div class="cpr-m"><div class="cpr-tg"></div><div class="cpr-ind" id="cprI"></div></div><div class="cpr-st"><div class="cpr-stat"><div class="cpr-st-v" id="cprC">0</div><div>Нажатий</div></div><div class="cpr-stat"><div class="cpr-st-v" id="cprR">0</div><div>Уд/мин</div></div><div class="cpr-stat"><div class="cpr-st-v" id="cprT">15</div><div>Секунд</div></div></div><button class="btn sc" style="flex-direction:row;margin:10px auto 0;padding:12px 35px" onclick="cprP()"><i class="fas fa-hand-paper"></i> НАЖАТЬ</button></div>';window.cprP_=[];window.cprT=15;window.cprI=setInterval(()=>{window.cprT--;document.getElementById('cprT').textContent=window.cprT;const i=document.getElementById('cprI');if(i)i.style.left=((15-window.cprT)/15*100)+'%';const now=Date.now();window.cprP_=window.cprP_.filter(t=>now-t<5000);const rate=window.cprP_.length>1?Math.round(60000/((now-window.cprP_[0])/(window.cprP_.length-1))):0;document.getElementById('cprR').textContent=rate;document.getElementById('cprC').textContent=window.cprP_.length;if(window.cprT<=0){clearInterval(window.cprI);const gd=window.cprP_.filter((t,i,a)=>{if(i===0)return true;const iv=t-a[i-1];return iv>=450&&iv<=650}).length;finSurg(gd>=window.cprP_.length*.6)}},100)}
+function cprP(){if(window.cprT<=0)return;window.cprP_.push(Date.now());S.cpr();document.getElementById('cprC').textContent=window.cprP_.length;const h=document.querySelector('.cpr-c .hrt-b');if(h){h.style.transform='scale(1.3)';setTimeout(()=>h.style.transform='',100)}}
+function intG(){document.getElementById('mgT').innerHTML='<i class="fas fa-lungs"></i> Интубация';document.getElementById('mgH').textContent='Проведите мышкой по траектории!';const a=document.getElementById('mgA');a.innerHTML='<canvas id="intC" width="600" height="220"></canvas>';const c=document.getElementById('intC');const ctx=c.getContext('2d');c.width=c.offsetWidth||600;c.height=c.offsetHeight||220;const path=[];const seg=20;for(let i=0;i<=seg;i++){path.push({x:(c.width*.1)+(c.width*.8*i/seg),y:c.height/2+Math.sin(i/seg*Math.PI*2)*35})}function draw(pr){ctx.clearRect(0,0,c.width,c.height);ctx.strokeStyle='#334155';ctx.lineWidth=18;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);for(let i=1;i<path.length;i++)ctx.lineTo(path[i].x,path[i].y);ctx.stroke();ctx.strokeStyle='#10b981';ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(path[0].x,path[0].y);const ei=Math.floor(pr*(path.length-1));for(let i=1;i<=ei&&i<path.length;i++)ctx.lineTo(path[i].x,path[i].y);ctx.stroke();if(pr<1){const idx=Math.floor(pr*(path.length-1));const p=path[idx];ctx.fillStyle='#fbbf24';ctx.beginPath();ctx.arc(p.x,p.y,9,0,Math.PI*2);ctx.fill()}}let dr=false,pr=0,pi=0;draw(0);function gp(e){const r=c.getBoundingClientRect();const cx=e.touches?e.touches[0].clientX:e.clientX;const cy=e.touches?e.touches[0].clientY:e.clientY;return{x:(cx-r.left)*(c.width/r.width),y:(cy-r.top)*(c.height/r.height)}}function hm(e){if(!dr)return;e.preventDefault();const pos=gp(e);const tg=path[pi];if(!tg)return;const d=Math.hypot(pos.x-tg.x,pos.y-tg.y);if(d<30){pi++;S.int();pr=pi/(path.length-1);draw(pr);if(pi>=path.length){dr=false;c.removeEventListener('mousemove',hm);c.removeEventListener('touchmove',hm);setTimeout(()=>finSurg(true),300)}}else if(d>60){dr=false;c.removeEventListener('mousemove',hm);c.removeEventListener('touchmove',hm);toast('❌ Траектория нарушена','er');S.fail();setTimeout(()=>finSurg(false),500)}}c.addEventListener('mousedown',e=>{const pos=gp(e);if(Math.hypot(pos.x-path[0].x,pos.y-path[0].y)<30){dr=true;c.addEventListener('mousemove',hm)}});c.addEventListener('touchstart',e=>{const pos=gp(e);if(Math.hypot(pos.x-path[0].x,pos.y-path[0].y)<30){dr=true;c.addEventListener('touchmove',hm)}});setTimeout(()=>{if(pi<path.length){dr=false;finSurg(false)}},12000)}
+function finSurg(suc){G.surgC++;G.stats.totS++;if(suc)G.stats.sucS++;if(window.cprI)clearInterval(window.cprI);if(window.defH)document.removeEventListener('keydown',window.defH);if(suc){G.xp+=50;G.money+=500;G.cur++;G.patient.treated=true;G.rep=Math.min(100,G.rep+15);toast('🔪 Успешно! +$500 +50 XP','sc');S.suc();addLog('🔪 Операция');chkLvl();setTimeout(()=>{G.patient=null;newPatient()},1500)}else{if(G.challenge!=='training'){G.money-=200;G.rep=Math.max(0,G.rep-10)}toast('⚠️ Осложнение','er');S.fail();addLog('⚠️ Осложнение')}cM('mg');updUI();chkAch()}
+function cancelMG(){if(window.defH)document.removeEventListener('keydown',window.defH);if(window.cprI)clearInterval(window.cprI);cM('mg')}
+function renderWard(){const g=document.getElementById('wG');g.innerHTML='';let oc=0;G.ward.forEach((p,i)=>{const el=document.createElement('div');if(p){oc++;var statusColor=p.treated?'var(--suc)':(p.stay>7?'var(--acc)':'#f59e0b');var statusText=p.treated?'✅ Выздоравливает':(p.stay>7?'💀 Критическое':'⚠️ Ухудшение');var bgColor=p.treated?'#d1fae5':(p.stay>7?'#fee2e2':'#fef3c7');el.className='bed oc'+(p.crit?' crt':'');el.style.background=bgColor;el.innerHTML=`<i class="fas fa-bed"></i><div style="font-size:.72rem;font-weight:600">${p.name}</div><div style="font-size:.68rem">🦠 ${p.dis.name}</div>${p.diagnosed?`<div style="font-size:.65rem;color:var(--pri)">📋 ${p.diagnosed.name}</div>`:''}${p.lastDrugName?`<div style="font-size:.65rem;color:var(--wrn)">💊 ${p.lastDrugName}</div>`:''}<div style="font-size:.68rem;color:${statusColor};font-weight:600">${statusText}</div><div style="font-size:.68rem;color:var(--sec)">День: ${p.stay}</div>`;el.onclick=()=>{var action=confirm('Переназначить лечение для '+p.name+'?\n\nОК — открыть лекарства\nОтмена — выписать');if(action){G.selPatient={wardIndex:i,patient:p};document.getElementById('m-ward').classList.remove('on');oM('drugs');G.prescribeForWard=true;toast('💊 Выберите новое лекарство','')}else{G.ward[i]=null;if(p.treated){G.cur++;G.money+=200;G.xp+=15;G.rep=Math.min(100,G.rep+5);toast('✅ '+p.name+' выздоровел','sc')}else{G.money+=50;G.xp+=5;toast('⚠️ '+p.name+' выписан без лечения','wr');if(!G.returnPatients)G.returnPatients=[];G.returnPatients.push({...p,lastDrugName:p.lastDrugName||'неизвестно',returnTime:2+Math.floor(Math.random()*3)})}chkLvl();updUI();renderWard()}}}else{el.className='bed';el.innerHTML=`<i class="fas fa-bed"></i><div>Койка ${i+1}</div><div style="font-size:.68rem">Свободна</div>`}g.appendChild(el)});document.getElementById('wO').textContent=oc;G.ward.forEach((p,i)=>{if(p){if(p.treated){p.stay--;if(p.stay<=0){G.ward[i]=null;G.cur++;G.money+=200;G.rep=Math.min(100,G.rep+5);toast('✅ '+p.name+' выздоровел','sc');}}else{p.stay++;if(p.stay>10){G.ward[i]=null;G.dth++;G.rep=Math.max(0,G.rep-15);toast('💀 '+p.name+' умер в стационаре','er');S.fail();}}}});}
+function renderSkills(){const g=document.getElementById('sG');document.getElementById('spN').textContent=G.sp;const sks=[{id:'therapy',n:'Терапия',i:'fa-stethoscope',d:'Обследования -10% за ур.'},{id:'surgery',n:'Хирургия',i:'fa-scalpel',d:'+1 точка в мини-играх'},{id:'comm',n:'Коммуникация',i:'fa-comments',d:'+10% XP'},{id:'diag',n:'Диагностика',i:'fa-microscope',d:'Подсказки'},{id:'pharma',n:'Фармакология',i:'fa-pills',d:'Эффективность +15%'}];g.innerHTML='';sks.forEach(s=>{const el=document.createElement('div');el.className='sk';el.innerHTML=`<div class="sk-i"><i class="fas ${s.i}"></i></div><div class="sk-n">${s.n}</div><div class="sk-l">Уровень ${G.skills[s.id]}/5</div><div class="sk-d">${s.d}</div><button class="skb" ${G.sp<=0||G.skills[s.id]>=5?'disabled':''} onclick="upSk('${s.id}')">Прокачать</button>`;g.appendChild(el)})}
+function upSk(id){if(G.sp<=0||G.skills[id]>=5)return;G.sp--;G.skills[id]++;S.suc();renderSkills();updUI();const d=1-G.skills.therapy*.1;document.getElementById('p_a').textContent='$'+Math.floor(50*d);document.getElementById('p_x').textContent='$'+Math.floor(150*d);document.getElementById('p_u').textContent='$'+Math.floor(200*d);document.getElementById('p_e').textContent='$'+Math.floor(100*d);document.getElementById('p_b').textContent='$'+Math.floor(250*d);document.getElementById('p_c').textContent='$'+Math.floor(500*d)}
+function renderInv(){const g=document.getElementById('iG');g.innerHTML='';DRUGS.forEach(dr=>{const stock=G.inventory[dr.id]||0;const price=G.prices[dr.id]||dr.price;const el=document.createElement('div');el.className='inv-i';el.innerHTML=`<div class="n"><i class="fas ${dr.ic}"></i> ${dr.name}</div><div class="s">${dr.desc}</div><div class="c"><span class="q ${stock<=3?'low':''}">📦 ${stock} шт</span><span style="color:var(--suc)">$${price}</span></div><button class="skb" style="width:100%;margin-top:5px" onclick="buyDrug('${dr.id}')">Купить 5 шт</button>`;g.appendChild(el)})}
+function buyDrug(id){const dr=DRUGS.find(d=>d.id===id);const price=G.prices[id]||dr.price;const cost=price*5;if(G.money<cost){toast('💸 Нужно $'+cost,'er');S.fail();return}G.money-=cost;G.inventory[id]=(G.inventory[id]||0)+5;toast('📦 Куплено 5 шт','sc');S.suc();updUI();renderInv()}
+function renderStaff(){const g=document.getElementById('stfG');g.innerHTML='';STAFF_TYPES.forEach(s=>{const el=document.createElement('div');el.className='stf-i';el.innerHTML=`<div style="font-size:2rem;color:var(--pri)"><i class="fas ${s.ic}"></i></div><div class="info"><div class="n">${s.n} (${G.staff[s.id]})</div><div class="d">${s.d}</div></div><button class="skb" onclick="hire('${s.id}')">Нанять<br><small>$${s.cost}</small></button>`;g.appendChild(el)})}
+function hire(id){const st=STAFF_TYPES.find(s=>s.id===id);if(G.money<st.cost){toast('💸 Нужно $'+st.cost,'er');S.fail();return}G.money-=st.cost;G.staff[id]++;toast('✅ Нанят '+st.n,'sc');S.suc();updUI();renderStaff();chkAch()}
+function renderEquip(){const g=document.getElementById('eqG');g.innerHTML='';EQUIP.forEach(e=>{const cond=G.equipment[e.id];const color=cond>70?'var(--suc)':cond>30?'#f59e0b':'var(--acc)';const el=document.createElement('div');el.className='stf-i';el.innerHTML=`<div style="font-size:2rem;color:var(--pri)"><i class="fas ${e.ic}"></i></div><div class="info"><div class="n">${e.n}</div><div class="d">Состояние: <span style="color:${color};font-weight:700">${cond}%</span></div><div style="height:5px;background:var(--brd);border-radius:3px;overflow:hidden;margin-top:4px"><div style="height:100%;width:${cond}%;background:${color}"></div></div></div><button class="skb" onclick="repair('${e.id}')">Починить<br><small>$${e.cost/2}</small></button>`;g.appendChild(el)})}
+function repair(id){const e=EQUIP.find(x=>x.id===id);const cost=Math.floor(e.cost/2);if(G.money<cost){toast('💸 Нужно $'+cost,'er');S.fail();return}G.money-=cost;G.equipment[id]=100;toast('🔧 Починено','sc');S.suc();updUI();renderEquip()}
+function renderCampus(){const g=document.getElementById('campusMap');g.innerHTML='';const erEl=document.createElement('div');erEl.className='campus-building built';erEl.innerHTML=`<i class="fas fa-ambulance"></i><div class="n">Приёмный покой</div><div class="c">✅ Построено</div>`;g.appendChild(erEl);CAMPUS_BUILDINGS.forEach(b=>{const built=G.campus[b.id];const el=document.createElement('div');el.className='campus-building'+(built?' built':'');el.innerHTML=`<i class="fas ${b.ic}"></i><div class="n">${b.n}</div><div class="c">${built?'✅ Построено':'$'+b.cost+' (Ур.'+b.req+')'}</div>`;if(!built){el.onclick=()=>{if(G.lvl<b.req){toast('Нужен уровень '+b.req,'wr');return}if(G.money<b.cost){toast('💸 Нужно $'+b.cost,'er');return}if(confirm('Построить '+b.n+' за $'+b.cost+'?')){G.money-=b.cost;G.campus[b.id]=true;toast('🏗️ Построено: '+b.n,'sc');S.suc();if(b.id==='lab')G.equipment.lab=100;if(b.id==='imaging'){G.equipment.xray=100;G.equipment.us=100;G.equipment.ct=100}if(b.id==='pharmacy')DRUGS.forEach(d=>G.inventory[d.id]+=20);updUI();renderCampus();chkAch()}}}g.appendChild(el)})}
+function renderResidency(){const area=document.getElementById('resContent');if(G.challenge!=='residency'){area.innerHTML='<div style="text-align:center;padding:20px"><i class="fas fa-info-circle" style="font-size:3rem;color:var(--wrn);margin-bottom:15px"></i><h3 style="margin-bottom:10px">Режим ординатуры недоступен</h3><p style="color:var(--sec)">Выберите режим "Ординатура" при запуске игры.</p></div>';return}if(G.residencyLevel>=3){area.innerHTML='<div style="text-align:center;padding:20px"><i class="fas fa-graduation-cap" style="font-size:4rem;color:var(--suc);margin-bottom:15px"></i><h3 style="margin-bottom:10px">🎓 Ординатура завершена!</h3><div style="margin-top:15px;padding:10px;background:#d1fae5;border-radius:8px"><b>Уровень:</b> '+G.residencyLevel+'/3<br><b>Экзаменов сдано:</b> '+G.residencyExam+'</div></div>';return}const unlearned=DISEASES.filter(d=>!G.residencyTheory[d.id]);const currentDisease=unlearned.length>0?unlearned[0]:DISEASES[G.residencyExam%DISEASES.length];let html='<h3 style="margin-bottom:15px"><i class="fas fa-book-medical" style="color:var(--pri)"></i> Теория: '+currentDisease.name+'</h3>';html+='<div class="theory-card">'+currentDisease.theory+'</div>';html+='<button class="skb" style="width:100%;padding:10px;margin-bottom:15px" onclick="studyTheory(\''+currentDisease.id+'\')"><i class="fas fa-check"></i> Изучено (+5 XP)</button>';if(Object.keys(G.residencyTheory).length>=3){const q=RESIDENCY_QUESTIONS[G.residencyExam%RESIDENCY_QUESTIONS.length];html+='<h3 style="margin:15px 0 10px"><i class="fas fa-question-circle" style="color:var(--wrn)"></i> Экзамен</h3>';html+='<div class="quiz-q">'+q.q+'</div>';q.a.forEach((a,i)=>{html+='<div class="quiz-a" onclick="answerExam('+i+','+q.c+')">'+a+'</div>'})}else{html+='<div style="padding:10px;background:#fef3c7;border-radius:8px;font-size:.85rem"><i class="fas fa-info-circle"></i> Изучите теорию 3 болезней для экзаменов</div>'}html+='<div style="margin-top:15px;padding:10px;background:#f8fafc;border-radius:8px;font-size:.85rem"><b>Прогресс:</b> Уровень '+G.residencyLevel+'/3, Изучено: '+Object.keys(G.residencyTheory).length+' болезней</div>';area.innerHTML=html}
+function studyTheory(id){if(!G.residencyTheory[id]){G.residencyTheory[id]=true;G.xp+=5;toast('📚 Теория изучена! +5 XP','sc');S.suc();renderResidency();chkAch()}}
+function answerExam(selected,correct){const answers=document.querySelectorAll('.quiz-a');if(selected===correct){answers[selected].classList.add('ok');G.residencyExam++;if(G.residencyExam%3===0){G.residencyLevel++;G.sp++;toast('🎓 Уровень ординатуры: '+G.residencyLevel,'sc')}toast('✅ Верно!','sc');S.suc()}else{answers[selected].classList.add('no');answers[correct].classList.add('ok');toast('❌ Неверно!','er');S.fail()}setTimeout(()=>renderResidency(),1500)}
+function renderPharma(){const l=document.getElementById('phL');l.innerHTML='';DRUGS.forEach(dr=>{const el=document.createElement('div');el.className='dr';el.innerHTML=`<div class="drn"><i class="fas ${dr.ic}"></i> ${dr.name}</div><div class="drd">${dr.desc}</div><div style="color:var(--suc);font-weight:700;margin-top:3px">$${dr.price}</div>`;l.appendChild(el)})}
+function renderAch(){const l=document.getElementById('aL');l.innerHTML='';ACH.forEach(a=>{const un=G.ach.has(a.id);const el=document.createElement('div');el.className='ach '+(un?'un':'lk');el.innerHTML=`<div class="ai"><i class="fas ${a.ic}"></i></div><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${a.n}</div><div style="font-size:.75rem;color:var(--sec)">${a.d}</div></div>${un?'<i class="fas fa-check-circle" style="color:var(--suc);font-size:1.2rem"></i>':''}`;l.appendChild(el)})}
+function chkAch(){ACH.forEach(a=>{if(!G.ach.has(a.id)&&a.c()){G.ach.add(a.id);toast('🏆 '+a.n,'sc');G.xp+=30;S.suc();chkLvl()}})}
+function renderStats(){const g=document.getElementById('stG');const acc=G.stats.totD>0?Math.round(G.stats.corD/G.stats.totD*100):0;const sa=G.stats.totS>0?Math.round(G.stats.sucS/G.stats.totS*100):0;g.innerHTML=`<div class="stb"><div class="stb-v">${G.cur}</div><div class="stb-l">Вылечено</div></div><div class="stb"><div class="stb-v">${G.dth}</div><div class="stb-l">Потери</div></div><div class="stb"><div class="stb-v">${acc}%</div><div class="stb-l">Точность диагнозов</div></div><div class="stb"><div class="stb-v">${sa}%</div><div class="stb-l">Успех операций</div></div><div class="stb"><div class="stb-v">${G.stats.totE}</div><div class="stb-l">Обследований</div></div><div class="stb"><div class="stb-v">${Math.round(G.stats.avgT)}с</div><div class="stb-l">Среднее время</div></div><div class="stb"><div class="stb-v">${Math.floor(G.stats.playT/60)}м</div><div class="stb-l">Время в игре</div></div><div class="stb"><div class="stb-v">${G.rep}/100</div><div class="stb-l">Репутация</div></div><div class="stb"><div class="stb-v">${G.surgC}</div><div class="stb-l">Операций</div></div><div class="stb"><div class="stb-v">${G.ach.size}/${ACH.length}</div><div class="stb-l">Достижений</div></div><div class="stb"><div class="stb-v">${G.residencyLevel}/3</div><div class="stb-l">Ординатура</div></div><div class="stb"><div class="stb-v">${Object.values(G.campus).filter(v=>v).length}</div><div class="stb-l">Корпусов</div></div>`}
+function randEv(){if(!G.running||Math.random()>.3)return;const evs=[{t:'🚨 Проверка Минздрава! -$300',f:()=>{G.money-=300}},{t:'⭐ VIP-пациент!',f:()=>{G.events.vip=true;setTimeout(()=>G.events.vip=false,120000)}},{t:'⚡ Отключение света! -$150',f:()=>{G.money-=150}},{t:'📚 Конференция! +1 очко',f:()=>{G.sp++}},{t:'💰 Грант! +$500',f:()=>{G.money+=500}},{t:'📰 Пресса! Репутация +10',f:()=>{G.rep=Math.min(100,G.rep+10)}},{t:'🎁 Пожертвование! +$1000',f:()=>{G.money+=1000}},{t:'⚠️ Жалоба! Репутация -5',f:()=>{G.rep=Math.max(0,G.rep-5)}}];const ev=evs[Math.floor(Math.random()*evs.length)];document.getElementById('evT').textContent=ev.t;const b=document.getElementById('evb');b.classList.add('on');b.classList.toggle('crt',ev.t.includes('🚨')||ev.t.includes('⚡')||ev.t.includes('⚠️'));ev.f();updUI();setTimeout(()=>b.classList.remove('on'),6000)}
+function chkLvl(){while(G.xp>=G.xpM){G.xp-=G.xpM;G.lvl++;G.xpM=Math.floor(G.xpM*1.5);G.sp++;G.maxT+=5;G.tmr=G.maxT;toast('🎉 Уровень '+G.lvl+'! +1 очко','sc');S.suc();chkAch();if(G.challenge==='training'&&G.lvl===3){G.trainingDone=true;toast('🎓 Обучение завершено!','sc')}}const r=[...RANKS].reverse().find(r=>G.lvl>=r.l)||RANKS[0];document.getElementById('rnk').textContent=r.n}
+function getSvData(){return{money:G.money,xp:G.xp,xpM:G.xpM,lvl:G.lvl,cur:G.cur,dth:G.dth,tmr:G.tmr,maxT:G.maxT,pCnt:G.pCnt,sp:G.sp,skills:G.skills,rep:G.rep,stats:G.stats,surgC:G.surgC,ach:Array.from(G.ach),ward:G.ward,inventory:G.inventory,staff:G.staff,equipment:G.equipment,prices:G.prices,challenge:G.challenge,campus:G.campus,residencyLevel:G.residencyLevel,residencyExam:G.residencyExam,residencyTheory:G.residencyTheory,lastSv:Date.now(),v:'17.1'}}
+function applySv(d){G.money=d.money||1000;G.xp=d.xp||0;G.xpM=d.xpM||50;G.lvl=d.lvl||1;G.cur=d.cur||0;G.dth=d.dth||0;G.tmr=d.tmr||90;G.maxT=d.maxT||90;G.pCnt=d.pCnt||0;G.sp=d.sp||0;G.skills=d.skills||{therapy:0,surgery:0,comm:0,diag:0,pharma:0};G.rep=d.rep||50;G.stats=d.stats||{totD:0,corD:0,totS:0,sucS:0,totE:0,avgT:0,playT:0};G.surgC=d.surgC||0;G.ach=new Set(d.ach||[]);G.ward=d.ward||Array(8).fill(null);G.inventory=d.inventory||{};G.staff=d.staff||{nurses:0,orderlies:0,residents:0};G.equipment=d.equipment||{xray:100,us:100,ct:100,ecg:100,lab:100};G.prices=d.prices||{};G.challenge=d.challenge||'normal';G.campus=d.campus||{er:true,icu:false,surgery:false,lab:false,imaging:false,pharmacy:false,maternity:false,rehab:false};G.residencyLevel=d.residencyLevel||0;G.residencyExam=d.residencyExam||0;G.residencyTheory=d.residencyTheory||{};if(typeof DRUGS !== 'undefined'){DRUGS.forEach(dr=>{if(!(dr.id in G.inventory))G.inventory[dr.id]=10});DRUGS.forEach(dr=>{if(!(dr.id in G.prices))G.prices[dr.id]=dr.price})}}
+function save(){if(!G.running){toast('Игра не запущена','er');return}try{const d=getSvData();localStorage.setItem(SK,JSON.stringify(d));G.lastSv=Date.now();document.getElementById('lstSv').textContent=new Date().toLocaleString();toast('💾 Сохранено','sc');S.suc()}catch(e){toast('Ошибка: '+e.message,'er')}}
+function autoSv(){if(!G.running)return;try{localStorage.setItem(SK,JSON.stringify(getSvData()));G.lastSv=Date.now()}catch(e){}}
+function loadInt(){try{const sv=localStorage.getItem(SK);if(!sv){toast('Нет сохранения','er');S.fail();return}applySv(JSON.parse(sv));G.running=true;if(!G.patient)newPatient();startECG();startTimers();renderAll();setInterval(randEv,45000);setInterval(autoSv,30000);setInterval(()=>{if(G.running)G.stats.playT++},1000);setInterval(updatePrices,60000);setInterval(degradeEquip,120000);toast('✅ Загружено','sc');S.suc();cM('load')}catch(e){toast('Ошибка: '+e.message,'er');S.fail()}}
+function load(){loadInt()}
+function expSv(){try{const code=btoa(JSON.stringify(getSvData()));document.getElementById('expC').value=code;document.getElementById('exA').style.display='block';toast('Код готов','sc')}catch(e){toast('Ошибка','er')}}
+function impSv(){document.getElementById('imA').style.display='block'}
+function doImp(){try{const c=document.getElementById('impC').value.trim();if(!c){toast('Вставьте код','wr');return}applySv(JSON.parse(atob(c)));G.running=true;if(!G.patient)newPatient();startECG();renderAll();startTimers();toast('✅ Импортировано','sc');S.suc();cM('load')}catch(e){toast('Неверный код','er');S.fail()}}
+function reset(){if(!confirm('Точно удалить всё?'))return;localStorage.removeItem(SK);location.reload()}
+function exitToMenu(){if(!confirm('Выйти в главное меню? Несохранённый прогресс будет потерян!'))return;G.running=false;G.patient=null;G.started=false;document.getElementById('game').classList.remove('vis');document.getElementById('loader').style.display='flex';document.getElementById('loader').style.opacity='1';enBtns()}
+function changeMode(){var modes=['normal','tsunami','broke','epidemic','disaster','training','residency'];var names=['🟢 Обычный день','🌊 Цунами','💸 Кризис','🦠 Эпидемия','💥 Катастрофа','🎓 Обучение','👨‍⚕️ Ординатура'];var msg='Выберите новый режим:\n\n';for(var i=0;i<modes.length;i++){msg+=(i+1)+'. '+names[i]+'\n'}var choice=prompt(msg,'1');if(!choice)return;var idx=parseInt(choice)-1;if(idx>=0&&idx<modes.length){G.challenge=modes[idx];toast('🔄 Режим: '+names[idx],'sc');S.suc()}else{toast('Неверный выбор','er')}}
+function oM(id){
+    if(id==='diag')rDiag();
+    if(id==='drugs')rDrugs();
+    if(id==='skills')renderSkills();
+    if(id==='inv')renderInv();
+    if(id==='staff')renderStaff();
+    if(id==='equip')renderEquip();
+    if(id==='campus')renderCampus();
+    if(id==='residency')renderResidency();
+    if(id==='pharma')renderPharma();
+    if(id==='ward')renderWard();
+    if(id==='ach')renderAch();
+    if(id==='stats')renderStats();
+    if(id==='chat')openChat();
+    if(id==='save'){
+        document.getElementById('exA').style.display='none';
+        document.getElementById('lstSv').textContent=G.lastSv?new Date(G.lastSv).toLocaleString():'никогда';
+    }
+    if(id==='load')document.getElementById('imA').style.display='none';
+    document.getElementById('m-'+id).classList.add('on');
+}
+function cM(id){
+    const modal = document.getElementById('m-'+id);
+    const mod = modal.querySelector('.mod');
+    
+    // Анимация закрытия
+    if(mod) {
+        mod.style.transform = 'translateY(30px) scale(0.95)';
+        mod.style.opacity = '0';
+    }
+    
+    setTimeout(() => {
+        modal.classList.remove('on');
+        // Сброс стилей после закрытия
+        if(mod) {
+            mod.style.transform = '';
+            mod.style.opacity = '';
+        }
+    }, 300);
+}
+window.onclick=e=>{if(e.target.classList.contains('mbg'))e.target.classList.remove('on')}
+// ============================================
+// ПЛАВНАЯ АНИМАЦИЯ ЧИСЕЛ
+// ============================================
+function animateValue(id, start, end, duration = 600) {
+    const obj = document.getElementById(id);
+    if (!obj) return;
+    
+    // Если start и end одинаковые — не анимируем
+    if (start === end) {
+        obj.textContent = end.toLocaleString('ru-RU');
+        return;
+    }
+    
+    let startTimestamp = null;
+    
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        // Функция плавности (easeOutQuart) - быстро стартует, плавно останавливается
+        const ease = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(ease * (end - start) + start);
+        
+        // Форматируем число с пробелами для тысяч
+        obj.textContent = current.toLocaleString('ru-RU');
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            obj.textContent = end.toLocaleString('ru-RU');
+        }
+    };
+    
+    window.requestAnimationFrame(step);
+}
+function updUI(){
+    // Плавная анимация денег
+    const oldMoney = parseInt(document.getElementById('mny').textContent.replace(/\s/g, '')) || 0;
+    if(oldMoney !== G.money) {
+        animateValue('mny', oldMoney, G.money, 800);
+    }
+    
+    // Плавная анимация опыта
+    const oldXp = parseInt(document.getElementById('xp').textContent) || 0;
+    if(oldXp !== G.xp) {
+        animateValue('xp', oldXp, G.xp, 500);
+    }
+    
+    // Остальное обновляем как обычно
+    document.getElementById('xpM').textContent = G.xpM;
+    document.getElementById('xpF').style.width = (G.xp/G.xpM*100) + '%';
+    document.getElementById('lvl').textContent = G.lvl;
+    
+    // Плавная анимация вылеченных
+    const oldCur = parseInt(document.getElementById('cur').textContent) || 0;
+    if(oldCur !== G.cur) {
+        animateValue('cur', oldCur, G.cur, 400);
+    }
+    
+    document.getElementById('dth').textContent = G.dth;
+    const oldRep = parseInt(document.getElementById('rep').textContent) || 0;
+if(oldRep !== G.rep) {
+    animateValue('rep', oldRep, G.rep, 400);
+}
+    chkAch();
+}
+function renderAll(){renderPat();updUI();renderTrust()}
+// ============================================
+// ТРЯСКА ЭКРАНА
+// ============================================
+function shakeScreen(intensity = 'normal') {
+    const body = document.body;
+    body.classList.remove('screen-shake');
+    
+    // Сбрасываем анимацию
+    void body.offsetWidth;
+    
+    if (intensity === 'strong') {
+        body.style.animation = 'screenShake 0.5s cubic-bezier(.36,.07,.19,.97) both';
+    } else {
+        body.style.animation = 'screenShake 0.3s cubic-bezier(.36,.07,.19,.97) both';
+    }
+    
+    setTimeout(() => {
+        body.style.animation = '';
+    }, 500);
+}
+function toast(t,tp=''){
+    // Безопасная вибрация
+    if(navigator.vibrate) {
+        if(tp==='er') navigator.vibrate([100, 50, 100]); // Двойная при ошибке
+        else if(tp==='sc') navigator.vibrate(40); // Короткая при успехе
+        else navigator.vibrate(20); // Микро-вибрация при инфо
+    }
+    
+    const el=document.createElement('div');
+    el.className='toast '+tp;
+    const icons={sc:'fa-check-circle',er:'fa-times-circle',wr:'fa-exclamation-triangle','':'fa-info-circle'};
+    el.innerHTML=`<i class="fas ${icons[tp]||icons['']}"></i><span>${t}</span>`;
+    document.getElementById('toasts').appendChild(el);
+    setTimeout(()=>{el.style.opacity='0';el.style.transform='translateX(100%)';setTimeout(()=>el.remove(),300)},3000)
+}
+function spawn(el){const r=el.getBoundingClientRect();const cx=r.left+r.width/2,cy=r.top+r.height/2;for(let i=0;i<12;i++){const p=document.createElement('div');p.className='part';p.style.left=cx+'px';p.style.top=cy+'px';p.style.background=['#0891b2','#059669','#fbbf24'][Math.floor(Math.random()*3)];const a=Math.random()*Math.PI*2,d=50+Math.random()*50;p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',Math.sin(a)*d+'px');document.body.appendChild(p);setTimeout(()=>p.remove(),1000)}}
+function startECG(){try{const c=document.getElementById('ecg');if(!c)return;const ctx=c.getContext('2d');const lb=document.getElementById('eLb');const hr=document.getElementById('eHr');setTimeout(()=>{c.width=c.offsetWidth*2||600;c.height=c.offsetHeight*2||150},100);let x=0,lastB=0,curP='normal',pPer=60,irrP=0;function draw(){if(!c||!ctx||!G.running)return;if(G.patient&&G.patient.dis&&G.patient.dis.ecg)curP=G.patient.dis.ecg;else curP='normal';const pi=ECG[curP]||ECG.normal;pPer=pi.p;if(lb&&lb.textContent!==pi.n){lb.textContent=pi.n;lb.className='ecg-lb '+(pi.lc||'');lb.style.color=pi.c}if(hr&&G.patient){hr.textContent=Math.round(G.patient.vit.hr)+' BPM';hr.style.color=pi.c}ctx.fillStyle='rgba(15,23,42,0.1)';ctx.fillRect(0,0,c.width,c.height);let ph;if(pi.irr){irrP+=1/pPer;if(irrP>=1){irrP=0;pPer=40+Math.random()*30}ph=irrP}else{ph=(x%pPer)/pPer}const y=c.height/2;const py=ecgY(curP,ph,y);ctx.fillStyle=pi.c;ctx.fillRect(x,py,2,2);x+=2;if(x>=c.width){x=0;ctx.clearRect(0,0,c.width,c.height)}if(curP!=='asystole'&&ph>.18&&ph<.22&&Date.now()-lastB>300){lastB=Date.now();if(G.patient&&G.patient.crit)S.hb()}requestAnimationFrame(draw)}draw();console.log('✅ ЭКГ запущена')}catch(e){console.error('❌ ЭКГ:',e)}}
+document.addEventListener('click',()=>{
+    initA();
+    // Автоматически запускаем музыку после первого клика
+    setTimeout(() => startBackgroundMusic(), 500);
+},{once:true});
+document.addEventListener('touchstart',()=>{
+    initA();
+    setTimeout(() => startBackgroundMusic(), 500);
+},{once:true});
+// Запрет на открытие ссылок в браузере (для iOS Standalone)
+document.addEventListener('click', function(e) {
+    if (e.target.tagName === 'A' && e.target.href && !e.target.href.startsWith('javascript:')) {
+        if (window.navigator.standalone) {
+            e.preventDefault();
+            window.location.href = e.target.href;
+        }
+    }
+});
+</script>
+
+<div id="sceneTransition">
+    <div class="transition-text" id="transitionText">Следующий пациент...</div>
+</div>
+
+<div id="toasts"></div>
+
+</body>
+</html>
