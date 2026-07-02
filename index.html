@@ -845,14 +845,44 @@ function startNew(){if(G.started)return;G.started=true;G.challenge=document.getE
 function startLoad(){if(G.started)return;const sv=localStorage.getItem(SK);if(!sv){toast('Нет сохранения','er');return}G.started=true;hideLoader(loadInt)}
 function forceReset(){if(!confirm('Удалить все сохранения?'))return;localStorage.removeItem(SK);location.reload()}
 function startGame(){try{G.running=true;newPatient();startTimers();startECG();renderAll();setInterval(randEv,45000);setInterval(autoSv,30000);setInterval(()=>{if(G.running)G.stats.playT++},1000);setInterval(updatePrices,60000);setInterval(degradeEquip,120000);if(G.challenge==='training')toast('🎓 Обучение: без штрафов','sc');if(G.challenge==='residency')toast('👨‍⚕️ Ординатура','sc');console.log('✅ Игра запущена:',G.challenge)}catch(e){console.error('Ошибка:',e);toast('Ошибка: '+e.message,'er')}}
-function startTimers(){setInterval(()=>{if(!G.running)return;const spd=G.challenge==='tsunami'?2:1;G.tmr-=spd;if(G.money<0)G.money=0;if(G.rep<0)G.rep=0;if(G.rep<50&&Math.random()<0.1){G.rep=Math.min(100,G.rep+1)}if(G.trust>0)G.trust-=.2*spd*getDiffMod();if(G.challenge!=='training'&&Math.random()<0.05){G.money+=G.lvl*2}if(G.challenge!=='training'&&G.rep>=80&&Math.random()<0.02){G.money+=50;toast('🌟 VIP-пожертвование +$50','sc')}if(!G.patient&&G.admitOpen){newPatient()}if(!G.admitOpen&&!G.patient){G.tmr = Math.max(40, Math.floor(G.maxT / getDiffMod()));document.getElementById('tmr').textContent=Math.round(G.tmr);renderPat();return}if(G.tmr<=0){if(G.patient){var choice=confirm('⏰ Время вышло!\n\nНажмите ОК — купить +30 сек за $100\nНажмите Отмена — отпустить пациента (-10 репутации)');if(choice){if(G.money>=100||G.challenge==='training'){if(G.challenge!=='training')G.money-=100;G.tmr=30;toast('⏰ +30 секунд (-$100)','sc');S.suc();addLog('⏰ Время продлено')}else{G.money-=100;G.tmr=30;toast('⏰ +30 секунд (в долг)','wr');S.fail();addLog('⏰ Время продлено (долг)')}}else{G.rep=Math.max(0,G.rep-10);G.patient=null;G.tmr=G.maxT;toast('🚶 Пациент отпущен (-10 репутации)','wr');S.fail();addLog('🚶 Пациент отпущен');updUI();newPatient()}}else{G.tmr=G.maxT;newPatient()}}if(G.trust<=0&&G.patient&&G.challenge!=='training'){toast('😡 Пациент ушёл!','er');G.dth++;G.patient=null;G.rep=Math.max(0,G.rep-10);newPatient()}if(G.returnPatients&&G.returnPatients.length>0){for(var ri=G.returnPatients.length-1;ri>=0;ri--){G.returnPatients[ri].returnTime--;if(G.returnPatients[ri].returnTime<=0){var rp=G.returnPatients[ri];G.returnPatients.splice(ri,1);if(!G.patient){G.patient=rp;G.patient.aiComplaint='"Доктор, я уже был у вас! Лечение '+G.patient.lastDrugName+' не помогло. Мне всё ещё плохо..."';G.trust=Math.max(0,G.trust-20);toast('🔄 Пациент вернулся! Лечение не помогло','wr');S.fail();addLog('🔄 Возврат пациента');renderPat();renderTrust()}else{G.returnPatients.push(rp);rp.returnTime=2}}}}document.getElementById('tmr').textContent=Math.max(0,Math.round(G.tmr));if(G.patient)driftVit();renderTrust()},1000)}
+function startTimers(){setInterval(()=>{if(!G.running)return;const spd=G.challenge==='tsunami'?2:1;G.tmr-=spd;if(G.money<0)G.money=0;if(G.rep<0)G.rep=0;if(G.rep<50&&Math.random()<0.1){G.rep=Math.min(100,G.rep+1)}if(G.trust>0)G.trust-=.2*spd*getDiffMod();if(G.challenge!=='training'&&Math.random()<0.05){G.money+=G.lvl*2}if(G.challenge!=='training'&&G.rep>=80&&Math.random()<0.02){G.money+=50;toast('🌟 VIP-пожертвование +$50','sc')}if(!G.patient&&G.admitOpen){newPatient()}if(!G.admitOpen&&!G.patient){
+    G.tmr = Math.max(40, Math.floor(G.maxT / getDiffMod()));
+    document.getElementById('tmr').textContent=Math.round(G.tmr);
+    // Сбрасываем все критические эффекты
+    const s=document.getElementById('stress');
+    const pCard=document.getElementById('pCard');
+    const av=document.getElementById('av');
+    if(s){s.classList.remove('on');s._shaking=false;}
+    if(pCard)pCard.classList.remove('crit');
+    if(av)av.classList.remove('crit');
+    renderPat();
+    return
+}if(G.tmr<=0){if(G.patient){var choice=confirm('⏰ Время вышло!\n\nНажмите ОК — купить +30 сек за $100\nНажмите Отмена — отпустить пациента (-10 репутации)');if(choice){if(G.money>=100||G.challenge==='training'){if(G.challenge!=='training')G.money-=100;G.tmr=30;toast('⏰ +30 секунд (-$100)','sc');S.suc();addLog('⏰ Время продлено')}else{G.money-=100;G.tmr=30;toast('⏰ +30 секунд (в долг)','wr');S.fail();addLog('⏰ Время продлено (долг)')}}else{G.rep=Math.max(0,G.rep-10);G.patient=null;G.tmr=G.maxT;toast('🚶 Пациент отпущен (-10 репутации)','wr');S.fail();addLog('🚶 Пациент отпущен');updUI();newPatient()}}else{G.tmr=G.maxT;newPatient()}}if(G.trust<=0&&G.patient&&G.challenge!=='training'){
+       toast('😡 Пациент ушёл!','er');
+       G.dth++;
+       G.patient=null;
+       G.rep=Math.max(0,G.rep-10);
+       // Сбрасываем критические эффекты
+       const s=document.getElementById('stress');
+       const pCard=document.getElementById('pCard');
+       const av=document.getElementById('av');
+       if(s){s.classList.remove('on');s._shaking=false;}
+       if(pCard)pCard.classList.remove('crit');
+       if(av)av.classList.remove('crit');
+       newPatient()
+   }if(G.returnPatients&&G.returnPatients.length>0){for(var ri=G.returnPatients.length-1;ri>=0;ri--){G.returnPatients[ri].returnTime--;if(G.returnPatients[ri].returnTime<=0){var rp=G.returnPatients[ri];G.returnPatients.splice(ri,1);if(!G.patient){G.patient=rp;G.patient.aiComplaint='"Доктор, я уже был у вас! Лечение '+G.patient.lastDrugName+' не помогло. Мне всё ещё плохо..."';G.trust=Math.max(0,G.trust-20);toast('🔄 Пациент вернулся! Лечение не помогло','wr');S.fail();addLog('🔄 Возврат пациента');renderPat();renderTrust()}else{G.returnPatients.push(rp);rp.returnTime=2}}}}document.getElementById('tmr').textContent=Math.max(0,Math.round(G.tmr));if(G.patient)driftVit();renderTrust()},1000)}
 function updatePrices(){if(typeof DRUGS === 'undefined') return; DRUGS.forEach(d=>{const base=d.price;const fluct=1+(Math.random()-.5)*.3;const mult=G.challenge==='broke'?3:1;G.prices[d.id]=Math.round(base*fluct*mult)})}
 function degradeEquip(){Object.keys(G.equipment).forEach(k=>{G.equipment[k]=Math.max(0,G.equipment[k]-Math.floor(Math.random()*5+2))})}
 function driftVit(){if(!G.patient)return;const p=G.patient;p.vit.hr+=(Math.random()-.5)*2;if(p.vit.hr<40)p.vit.hr=40;if(p.vit.hr>160)p.vit.hr=160;renderVit();updateStress()}
 function updateStress(){
     const s=document.getElementById('stress');
-    if(G.patient&&G.patient.crit){
+    const pCard = document.getElementById('pCard');
+    const av = document.getElementById('av');
+    
+    if(G.patient && G.patient.crit){
         s.classList.add('on');
+        pCard.classList.add('crit');
+        if(av) av.classList.add('crit');
         // Лёгкая тряска при критическом состоянии
         if(!s._shaking) {
             s._shaking = true;
@@ -861,6 +891,10 @@ function updateStress(){
         }
     } else {
         s.classList.remove('on');
+        pCard.classList.remove('crit');
+        if(av) av.classList.remove('crit');
+        // Сбрасываем флаг тряски
+        s._shaking = false;
     }
 }
 function generatePatient(){
